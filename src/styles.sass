@@ -1,7 +1,7 @@
 // TODO: fix search field width and height, especially on firefox
 // TODO: fix search button width (must be depend on field size)
-// TODO: Sign In/Out different colors
 // TODO: make beautiful parallax
+// TODO: vertical align footer
 
 body
   margin: 0
@@ -35,17 +35,17 @@ button
   margin-left: auto
   margin-right: auto
 
+div.columns > div
+  float: left
+
 div.table
   display: table
-  width: 100%
   height: 100%
   text-align: center
   > div
     display: table-cell
     vertical-align: middle
     padding: 5px 8px
-  div.table
-    width: auto
 
 a.link-btn-light
   transition: color 0.3s ease-out
@@ -73,6 +73,7 @@ header
   div.search-field
     padding-right: 0
     text-align: right
+    width: 30vw
   div.search-button
     padding-left: 0
     text-align: left
@@ -80,10 +81,27 @@ header
     width: 100%
     height: 100%
 
-  div.auth-divs
+  div.content
+    position: relative
+    overflow: hidden
+
+  div.auth-div
     float: right
-    padding: 0
-    margin: 0
+    height: 100%
+    position: absolute
+    right: 0
+    top: 0
+    vertical-align: middle
+    > div
+      background: #66BB6A
+      height: 70%
+      padding: 5px
+      float: left
+    .sign-in
+      border-radius: 0 0 0 7px
+      margin-right: 2px
+    .sign-out
+      border-radius: 0 0 7px 0
 
   font-size: larger
   font-weight: bold
@@ -100,12 +118,16 @@ footer, header ul
   margin: auto
 
 footer
+  display: flex
   margin-top: 15px
   padding: 10px
   font-size: inherit
   div img
     width: 24px
     height: auto
+  div.columns > div
+    width: 33%
+    text-align: center
 
 main
   .group-img-div
@@ -128,5 +150,5 @@ main
       font-size: larger
       float: right
 
-.projects
-  height: 1000px
+div.links > div
+  border: 1px solid #388E3C
