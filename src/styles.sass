@@ -1,0 +1,100 @@
+body
+  margin: 0
+  padding: 0
+  font-family: 'Raleway', sans-serif
+
+input[type="search"]
+  opacity: 0.85
+  transition: opacity 0.3s ease-out
+  padding: 0 12px
+  border: 0
+  -webkit-border-radius: 4px 0 0 4px
+  border-radius: 5px 0 0 5px
+  &:focus
+    opacity: 0.97
+
+button
+  background: #66BB6A
+  border: 0
+  transition: background-color .4s ease
+  border-radius: 0 5px 5px 0
+  &:hover
+    background: #81C784
+
+.content
+  height: 100%
+  width: 88%
+  margin-left: auto
+  margin-right: auto
+
+div.table
+  display: table
+  width: 100%
+  height: 100%
+  text-align: center
+  > div
+    display: table-cell
+    vertical-align: middle
+    padding: 5px 8px
+  div.table
+    width: auto
+
+a.link-btn-light
+  transition: color 0.3s ease-out
+  color: #e8f0db
+  text-decoration: none
+  &:hover
+    color: white
+
+a.link-btn-dark
+  color: black
+  text-decoration: none
+  &:hover
+    text-decoration: underline
+
+div.link-div
+  transition: background-color 0.25s ease-out
+  box-sizing: border-box
+  -moz-box-sizing: border-box
+  -webkit-box-sizing: border-box
+  &:hover
+    background-color: #4CAF50
+    outline-offset: -10px
+
+header
+  div.search-field
+    padding-right: 0
+    text-align: right
+  div.search-button
+    padding-left: 0
+    text-align: left
+  input
+    width: 100%
+    height: 100%
+
+  div.auth-divs
+    float: right
+    padding: 0
+    margin: 0
+
+  font-size: larger
+  font-weight: bold
+  background: #388E3C
+  height: auto
+  width: 100%
+  button
+    padding: 8px 13px
+    img
+      height: 17px
+      width: auto
+
+footer, header ul
+  margin: auto
+
+footer
+  margin-top: 15px
+  padding: 10px
+  font-size: inherit
+  div img
+    width: 24px
+    height: auto
