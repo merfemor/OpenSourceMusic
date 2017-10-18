@@ -1,41 +1,21 @@
-// TODO: fix search field width and height, especially on firefox
-// TODO: fix search button width (must be depend on field size)
 // TODO: make beautiful parallax
 
 body
   margin: 0
-  padding: 0
   font-family: 'Raleway', sans-serif
-
-input[type="search"]
-  opacity: 0.85
-  transition: opacity 0.3s ease-out
-  padding: 0 12px
-  border: 0
-  -webkit-border-radius: 4px 0 0 4px
-  border-radius: 5px 0 0 5px
-  &:focus
-    opacity: 0.97
 
 button
   background: #66BB6A
   border: 0
   transition: background-color .4s ease
-  border-radius: 0 5px 5px 0
   &:hover
     background: #81C784
-
-.full-width
-  width: 100%
 
 .content
   height: 100%
   width: 88%
   margin-left: auto
   margin-right: auto
-
-div.columns > div
-  float: left
 
 div.table
   display: table
@@ -102,12 +82,28 @@ header
     .sign-out
       border-radius: 0 0 7px 0
 
-  font-size: larger
+  font-size: large
   font-weight: bold
   background: #388E3C
   height: auto
-  width: 100%
+  .search
+    height: 5vh
+  input[type="search"]
+    height: 100%
+    width: 30vw
+    float: left
+    outline: 0
+    opacity: 0.9
+    transition: opacity 0.3s ease-out
+    padding: 0 12px
+    border: 0
+    -webkit-border-radius: 4px 0 0 4px
+    border-radius: 5px 0 0 5px
+    &:focus
+      opacity: 1
   button
+    border-radius: 0 5px 5px 0
+    height: 100%
     padding: 8px 13px
     img
       height: 17px
