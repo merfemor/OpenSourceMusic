@@ -118,7 +118,7 @@ footer, header ul
   margin: auto
 
 footer
-  display: flex
+  clear: both
   margin-top: 15px
   padding: 10px
   font-size: inherit
@@ -150,5 +150,32 @@ main
       font-size: larger
       float: right
 
-div.links > div
-  border: 1px solid #388E3C
+.projects
+  float: left
+  width: 67%
+  padding-right: 3%
+
+.sidebar
+  float: left
+  width: 30%
+
+table
+  width: 100%
+  border-collapse: collapse
+  th:last-child
+    width: 1%
+    white-space: nowrap
+
+td, th
+  padding: 10px
+  border-bottom: 1px solid #ddd
+
+tr:hover
+  background-color: #C8E6C9
+
+th
+  background-color: #4CAF50
+  color: white
+
+.released
+  background: #E8F5E9
