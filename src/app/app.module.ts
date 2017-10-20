@@ -5,10 +5,11 @@ import {Parallax} from "ngx-parallax";
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
-import {ProjectsBlockComponent} from './projects-block/projects-block.component';
+import {ProjectsComponent} from './projects/projects.component';
+import {MembersComponent} from './members/members.component';
 
 @NgModule({
-    declarations: [AppComponent, Parallax, HeaderComponent, FooterComponent, ProjectsBlockComponent],
+    declarations: [AppComponent, Parallax, HeaderComponent, FooterComponent, ProjectsComponent, MembersComponent],
     imports: [BrowserModule],
     bootstrap: [AppComponent]
 })
