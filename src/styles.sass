@@ -4,20 +4,13 @@ body
   margin: 0
   font-family: 'Raleway', sans-serif
 
-button
-  background: #66BB6A
-  border: 0
-  transition: background-color .4s ease
-  &:hover
-    background: #81C784
-
 .content
   height: 100%
   width: 88%
   margin-left: auto
   margin-right: auto
 
-div.table
+.table
   display: table
   height: 100%
   text-align: center
@@ -26,78 +19,37 @@ div.table
     vertical-align: middle
     padding: 5px 8px
 
-a.link-btn-light
+.link-btn-light
   transition: color 0.3s ease-out
   color: #e8f0db
   text-decoration: none
   &:hover
     color: white
 
-a.link-btn-dark
+.link-btn-dark
   color: black
   text-decoration: none
   &:hover
     text-decoration: underline
 
-div.link-div
-  transition: background-color 0.25s ease-out
-  box-sizing: border-box
-  -moz-box-sizing: border-box
-  -webkit-box-sizing: border-box
-  &:hover
-    background-color: #4CAF50
-    outline-offset: -10px
-
-main
-  .group-img-div
-    background: url('./assets/example/img/back.jpg') repeat-y top
-    height: 35vh
-    background-size: 100%
-    .title, .statistics div
-      border-radius: 17px
-      padding: 7px
-      background: rgba(#E8F5E9, 0.8)
-      display: inline-block
-    .title
-      margin-top: 10vh
-      margin-left: 10vh
-      font-size: 3.5em
-      float: left
-    .statistics
-      margin-top: 10vh
-      margin-right: 10vh
-      font-size: larger
-      float: right
-
+.group-img-div
+  background: url('/assets/example/img/back.jpg') repeat-y top
+  height: 35vh
+  background-size: 100%
+  .title, .statistics
+    margin-top: 8vh
+    border-radius: 17px
+    padding: 7px
+    background: rgba(#E8F5E9, 0.8)
+  .title
+    margin-left: 8vh
+    font-size: 35pt
+    float: left
+  .statistics
+    margin-right: 8vh
+    font-size: larger
+    float: right
 
 .sidebar
   float: left
   width: 30%
-
-table
-  width: 100%
-  border-collapse: collapse
-  th:last-child
-    width: 1%
-    white-space: nowrap
-
-td, th
-  padding: 10px
-  border-bottom: 1px solid #ddd
-
-tr:hover
-  background-color: #C8E6C9
-
-th
-  background-color: #4CAF50
-  color: white
-
-.released
-  background: #E8F5E9
-
-.profile-img
-  border-radius: 100px
-  overflow: hidden
-  height: 45px
-  width: 45px
-
