@@ -6,6 +6,7 @@ import {Component, OnInit} from '@angular/core';
     styleUrls: ['./profile.component.sass']
 })
 export class ProfileComponent implements OnInit {
+    user = new User("sample_nickname");
 
     constructor() {
     }
@@ -13,4 +14,13 @@ export class ProfileComponent implements OnInit {
     ngOnInit() {
     }
 
+}
+
+
+export class User {
+    public nickname: string;
+
+    constructor(nickname) {
+        this.nickname = nickname;
+    }
 }
