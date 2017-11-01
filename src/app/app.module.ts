@@ -8,9 +8,10 @@ import {FooterComponent} from './footer/footer.component';
 import {ProjectsComponent} from './group/projects/projects.component';
 import {MembersComponent} from './group/members/members.component';
 import {GroupComponent} from "./group/group.component";
+import {ProfileComponent} from './profile/profile.component';
 
 @NgModule({
-    declarations: [AppComponent, Parallax, HeaderComponent, FooterComponent, ProjectsComponent, MembersComponent, GroupComponent],
+    declarations: [AppComponent, Parallax, HeaderComponent, FooterComponent, ProjectsComponent, MembersComponent, GroupComponent, ProfileComponent],
     imports: [BrowserModule],
     bootstrap: [AppComponent]
 })
