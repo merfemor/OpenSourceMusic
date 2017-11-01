@@ -9,10 +9,16 @@ import {ProjectsComponent} from './group/projects/projects.component';
 import {MembersComponent} from './group/members/members.component';
 import {GroupComponent} from "./group/group.component";
 import {ProfileComponent} from './profile/profile.component';
+import {RouterModule} from "@angular/router";
+import {routes} from "./app.routes";
+
 
 @NgModule({
     declarations: [AppComponent, Parallax, HeaderComponent, FooterComponent, ProjectsComponent, MembersComponent, GroupComponent, ProfileComponent],
-    imports: [BrowserModule],
+    imports: [
+        BrowserModule,
+        RouterModule.forRoot(routes)
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {
