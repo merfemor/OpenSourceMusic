@@ -11,10 +11,11 @@ import {GroupComponent} from "./group/group.component";
 import {ProfileComponent} from './profile/profile.component';
 import {RouterModule} from "@angular/router";
 import {routes} from "./app.routes";
+import {SettingsComponent} from './settings/settings.component';
 
 
 @NgModule({
-    declarations: [AppComponent, Parallax, HeaderComponent, FooterComponent, ProjectsComponent, MembersComponent, GroupComponent, ProfileComponent],
+    declarations: [AppComponent, Parallax, HeaderComponent, FooterComponent, ProjectsComponent, MembersComponent, GroupComponent, ProfileComponent, SettingsComponent],
     imports: [
         BrowserModule,
         RouterModule.forRoot(routes)
