@@ -1,6 +1,7 @@
 <form [formGroup]="form" (ngSubmit)="singIn()">
     <h2>Sign in to OpenSourceMusic</h2>
     <div class="auth-form-body">
+        <!-- TODO: show authStatus only if form is valid and not redacted-->
         <div class="form-invalid-text" *ngIf="authStatus && !authStatus.successful">
             <span>{{authStatus.description}}</span>
         </div>

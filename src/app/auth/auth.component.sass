@@ -36,6 +36,25 @@
   &:hover
     background-color: #4CAF50
     cursor: pointer
+  &[disabled]
+    background: #989898
+    &:hover
+      cursor: inherit
 
 ::ng-deep .form-group
   margin: 15px 0
+
+::ng-deep .form-invalid-text
+  color: #86181d
+  background-color: #ffdce0
+  display: inline-block
+  padding: 5px 8px
+  margin-top: 10px
+  font-size: small
+  border: 1px solid #cea0a5
+  border-radius: 3px
+
+//::ng-deep .btn-submit[disabled]
+  background: #989898
+  &:hover
+    cursor: inherit
