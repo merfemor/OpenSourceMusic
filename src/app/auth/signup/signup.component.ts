@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {UserService} from "../../user.service";
 import {User} from "../../api";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 
 @Component({
@@ -12,27 +12,26 @@ import {Router} from "@angular/router";
 })
 export class SignUpComponent {
     user = new User();
-    form: FormGroup;
+    form = new FormGroup({
+        'username': new FormControl(this.user.username, [
+            Validators.required,
+            function (c: FormControl) {
+                return SignUpComponent.isUnique(c, true);
+            }
+        ]),
+        'email': new FormControl(this.user.email, [
+            Validators.email,
+            function (c: FormControl) {
+                return SignUpComponent.isUnique(c, false);
+            }
+        ]),
+        'password': new FormControl(this.user.password, [
+            Validators.required,
+            Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{9,}$')
+        ])
+    });
 
-    constructor(private router: Router, private fb: FormBuilder, private userService: UserService) {
-        this.form = new FormGroup({
-            'username': new FormControl(this.user.username, [
-                Validators.required,
-                function (c: FormControl) {
-                    return SignUpComponent.isUnique(c, true);
-                }
-            ]),
-            'email': new FormControl(this.user.email, [
-                Validators.email,
-                function (c: FormControl) {
-                    return SignUpComponent.isUnique(c, false);
-                }
-            ]),
-            'password': new FormControl(this.user.password, [
-                Validators.required,
-                Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{9,}$')
-            ])
-        })
+    constructor(private router: Router, private userService: UserService) {
     }
 
     private static isUnique(c: FormControl, isUsername: boolean) {
