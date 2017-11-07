@@ -18,8 +18,8 @@ export class UserService {
         return false; // unsuccessful
     }
 
-    public signIn(username_or_email: string, password: string): User {
-        return null; // unsuccessful
+    public signIn(username_or_email: string, password: string): boolean {
+        return false; // unsuccessful
     }
 
     public getUser(): User {
