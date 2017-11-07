@@ -3,6 +3,7 @@ export class User {
     public password: string;
     public firstName: string;
     public lastName: string;
+    public nickname: string;
 
     constructor(email: string, password: string) {
         this.email = email;
