@@ -9,7 +9,7 @@
         <p class="note">This will be your username. You can add your name and surname later.</p>
         <div class="form-invalid-text"
              *ngIf="form.get('username').invalid&&form.get('username').touched">
-            <span *ngIf="form.get('username')['errors']['required']">Username is requied</span>
+            <span *ngIf="form.get('username')['errors']['required']">Username is required</span>
             <span *ngIf="!form.get('username')['errors']['required'] && form.get('username')['errors']['isUnique']">Such a username exists, try another one</span>
         </div>
     </div>
