@@ -1,3 +1,5 @@
+// TODO: show Sign In as modal
+
 import {Component, OnInit} from '@angular/core';
 
 @Component({
