@@ -1,14 +1,27 @@
-<form id="signup-form">
+<form [formGroup]="form" (ngSubmit)="singIn()">
     <h2>Sign in to OpenSourceMusic</h2>
-    <div class="auth-form-body mt-3">
+    <div class="auth-form-body">
+        <div class="form-invalid-text" *ngIf="authStatus && !authStatus.successful">
+            <span>{{authStatus.description}}</span>
+        </div>
         <div class="form-group">
-            <label for="login_field">Username or email address</label>
-            <input autofocus="autofocus" class="form-control" id="login_field" name="login" type="text" required>
+            <label for="login">Username or email address</label>
+            <input formControlName="login" class="form-control" id="login" type="text" autofocus>
+            <div class="form-invalid-text"
+                 *ngIf="form.get('login').invalid && form.get('login').touched">
+                <span *ngIf="form.get('login')['errors']['required']">This field is required</span>
+            </div>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input class="form-control" id="password" name="password" type="password" required>
+            <input formControlName="password" class="form-control" id="password" type="password">
+            <div class="form-invalid-text"
+                 *ngIf="form.get('password').invalid && form.get('password').touched">
+                <span *ngIf="form.get('password')['errors']['required']">Password is required</span>
+            </div>
         </div>
-        <input class="btn-submit" type="submit" value="Sign in">
+        <button [disabled]="form.invalid" type="submit" class="btn-submit" id="signup_button">
+            Sign In
+        </button>
     </div>
 </form>
