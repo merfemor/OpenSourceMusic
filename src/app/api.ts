@@ -5,3 +5,8 @@ export class User {
     public lastName: string;
     public username: string;
 }
+
+export class AuthorizationStatus {
+    successful: boolean;
+    description: string;
+}
