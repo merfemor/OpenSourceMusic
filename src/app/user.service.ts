@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {User} from "./api";
+import {AuthorizationStatus, User} from "./api";
 
 @Injectable()
 export class UserService {
@@ -18,8 +18,11 @@ export class UserService {
         return false; // unsuccessful
     }
 
-    public signIn(username_or_email: string, password: string): boolean {
-        return false; // unsuccessful
+    public signIn(username_or_email: string, password: string): AuthorizationStatus {
+        return {
+            successful: false,
+            description: 'Unknown error'
+        };
     }
 
     public getUser(): User {
