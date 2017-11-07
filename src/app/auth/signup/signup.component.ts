@@ -17,16 +17,31 @@ export class SignUpComponent {
     constructor(private router: Router, private fb: FormBuilder, private userService: UserService) {
         this.form = new FormGroup({
             'username': new FormControl(this.user.username, [
-                Validators.required
+                Validators.required,
+                function (c: FormControl) {
+                    return SignUpComponent.isUnique(c, true);
+                }
             ]),
             'email': new FormControl(this.user.email, [
-                Validators.email
+                Validators.email,
+                function (c: FormControl) {
+                    return SignUpComponent.isUnique(c, false);
+                }
             ]),
             'password': new FormControl(this.user.password, [
                 Validators.required,
                 Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{9,}$')
             ])
         })
+    }
+
+    private static isUnique(c: FormControl, isUsername: boolean) {
+        let res = isUsername ? UserService.isUsernameExists(c.value) : UserService.isEmailExists(c.value);
+        return res ? {
+            isUnique: {
+                valid: false
+            }
+        } : null;
     }
 
     onSubmit() {
