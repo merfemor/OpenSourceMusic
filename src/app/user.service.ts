@@ -38,4 +38,8 @@ export class UserService {
         this.user = user;
         return this.user;
     }
+
+    public isLogged(): boolean {
+        return this.user != null;
+    }
 }
