@@ -13,10 +13,12 @@ import {RouterModule} from "@angular/router";
 import {routes} from "./app.routes";
 import {SettingsComponent} from './profile/settings/settings.component';
 import {RegistrationComponent} from './registration/registration.component';
+import {SignInComponent} from './registration/signin/signin.component';
+import {SignUpComponent} from './registration/signup/signup.component';
 
 
 @NgModule({
-    declarations: [AppComponent, Parallax, HeaderComponent, FooterComponent, ProjectsComponent, MembersComponent, GroupComponent, ProfileComponent, SettingsComponent, RegistrationComponent],
+    declarations: [AppComponent, Parallax, HeaderComponent, FooterComponent, ProjectsComponent, MembersComponent, GroupComponent, ProfileComponent, SettingsComponent, RegistrationComponent, SignInComponent, SignUpComponent],
     imports: [
         BrowserModule,
         RouterModule.forRoot(routes)
