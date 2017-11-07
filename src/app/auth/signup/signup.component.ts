@@ -19,7 +19,6 @@ export class SignUpComponent {
                 Validators.required
             ]),
             'email': new FormControl(this.user.email, [
-                Validators.required,
                 Validators.email
             ]),
             'password': new FormControl(this.user.password, [
