@@ -19,7 +19,8 @@
          [ngClass]="{'invalid': form.get('password').invalid && form.get('password').touched}">
         <label for="password">Password</label>
         <input formControlName="password" class="form-control" id="password" type="password">
-        <p class="note">Use at least one lowercase letter, one numeral, and seven characters.</p>
+        <p class="note">Must contain at least one letter in lower case, one letter in uppercase and one digit.<br>
+            The minimum password length is 9 characters.</p>
     </div>
 
     <button [disabled]="form.invalid" type="submit" class="btn-submit" id="signup_button">

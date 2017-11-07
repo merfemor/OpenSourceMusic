@@ -24,7 +24,7 @@ export class SignUpComponent {
             ]),
             'password': new FormControl(this.user.password, [
                 Validators.required,
-                Validators.minLength(9)
+                Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{9,}$')
             ])
         })
     }
