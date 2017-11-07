@@ -15,12 +15,15 @@ import {SettingsComponent} from './profile/settings/settings.component';
 import {AuthComponent} from './auth/auth.component';
 import {SignInComponent} from './auth/signin/signin.component';
 import {SignUpComponent} from './auth/signup/signup.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
     declarations: [AppComponent, Parallax, HeaderComponent, FooterComponent, ProjectsComponent, MembersComponent, GroupComponent, ProfileComponent, SettingsComponent, AuthComponent, SignInComponent, SignUpComponent],
     imports: [
+        FormsModule,
         BrowserModule,
+        ReactiveFormsModule,
         RouterModule.forRoot(routes)
     ],
     bootstrap: [AppComponent]

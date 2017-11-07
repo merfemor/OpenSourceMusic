@@ -5,14 +5,11 @@ import {User} from "./api";
 export class UserService {
     private user: User;
 
-    constructor() {
-    }
-
     public static isEmailExists(email: string): boolean {
         return true;
     }
 
-    public static isNicknameExists(nickname: string): boolean {
+    public static isUsernameExists(username: string): boolean {
         return true;
     }
 
@@ -21,8 +18,7 @@ export class UserService {
         return false; // unsuccessful
     }
 
-    public signIn(nickname_or_email: string, password: string): User {
-        this.user = new User(nickname_or_email, password);
+    public signIn(username_or_email: string, password: string): User {
         return null; // unsuccessful
     }
 

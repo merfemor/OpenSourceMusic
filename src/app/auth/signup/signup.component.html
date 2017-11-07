@@ -1,23 +1,28 @@
 <h1>Join OpenSourceMusic</h1>
 
-<form id="signup-form">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
     <h2>Create your personal account</h2>
 
-    <div class="form-group">
-        <label for="user_login">Login</label>
-        <input autofocus="autofocus" class="form-control" id="user_login" name="user[login]" type="text" required>
-        <p class="note">This will be your login. You can add your name and surname later.</p>
+    <div class="form-group"
+         [ngClass]="{'invalid': form.get('username').invalid && form.get('username').touched}">
+        <label for="login">Username</label>
+        <input formControlName="username" class="form-control" id="login" type="text" autofocus>
+        <p class="note">This will be your username. You can add your name and surname later.</p>
     </div>
-    <div class="form-group">
-        <label for="user_email">Email</label>
-        <input class="form-control" id="user_email" name="user[email]" type="email" required>
+    <div class="form-group"
+         [ngClass]="{'invalid': form.get('email').invalid && form.get('email').touched}">
+        <label for="email">Email</label>
+        <input formControlName="email" class="form-control" id="email" type="email">
         <p class="note">Email for notifications and account recovery.</p>
     </div>
-    <div class="form-group">
-        <label for="user_password">Password</label>
-        <input class="form-control" id="user_password" name="user[login]" type="password" required>
+    <div class="form-group"
+         [ngClass]="{'invalid': form.get('password').invalid && form.get('password').touched}">
+        <label for="password">Password</label>
+        <input formControlName="password" class="form-control" id="password" type="password">
         <p class="note">Use at least one lowercase letter, one numeral, and seven characters.</p>
     </div>
 
-    <input type="submit" class="btn-submit" id="signup_button" value="Create an account">
+    <button [disabled]="form.invalid" type="submit" class="btn-submit" id="signup_button">
+        Create an account
+    </button>
 </form>
