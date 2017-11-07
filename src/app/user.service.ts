@@ -6,11 +6,11 @@ export class UserService {
     private user: User;
 
     public static isEmailExists(email: string): boolean {
-        return true;
+        return false;
     }
 
     public static isUsernameExists(username: string): boolean {
-        return true;
+        return false;
     }
 
     public signUp(user: User): boolean {
@@ -19,10 +19,23 @@ export class UserService {
     }
 
     public signIn(username_or_email: string, password: string): AuthorizationStatus {
+        this.user = new User();
+        if (UserService.isEmailExists(username_or_email)) {
+            this.user.email = username_or_email;
+        } else if (UserService.isUsernameExists(username_or_email)) {
+            this.user.username = username_or_email;
+        } else {
+            return {
+                successful: false,
+                description: 'Incorrect username or email'
+            }
+        }
+
         return {
             successful: false,
             description: 'Unknown error'
-        };
+        }
+
     }
 
     public getUser(): User {
