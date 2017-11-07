@@ -11,7 +11,7 @@ import {GroupComponent} from "./group/group.component";
 import {ProfileComponent} from './profile/profile.component';
 import {RouterModule} from "@angular/router";
 import {routes} from "./app.routes";
-import {SettingsComponent} from './settings/settings.component';
+import {SettingsComponent} from './profile/settings/settings.component';
 
 
 @NgModule({
