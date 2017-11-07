@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
 @Component({
-    selector: 'app-registration',
+    selector: 'app-auth',
     templateUrl: './signin.component.html',
     styleUrls: ['./signin.component.sass']
 })

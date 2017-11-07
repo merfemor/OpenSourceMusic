@@ -2,9 +2,9 @@ import {Routes} from "@angular/router";
 import {ProfileComponent} from "./profile/profile.component";
 import {GroupComponent} from "./group/group.component";
 import {SettingsComponent} from "./profile/settings/settings.component";
-import {RegistrationComponent} from "./registration/registration.component";
-import {SignInComponent} from "./registration/signin/signin.component";
-import {SignUpComponent} from "./registration/signup/signup.component";
+import {AuthComponent} from "./auth/auth.component";
+import {SignInComponent} from "./auth/signin/signin.component";
+import {SignUpComponent} from "./auth/signup/signup.component";
 
 export const routes: Routes = [
     {
@@ -26,7 +26,7 @@ export const routes: Routes = [
     },
     {
         path: "join",
-        component: RegistrationComponent,
+        component: AuthComponent,
         children: [
             {
                 path: "",
