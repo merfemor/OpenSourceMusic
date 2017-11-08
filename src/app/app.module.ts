@@ -16,6 +16,7 @@ import {AuthComponent} from './auth/auth.component';
 import {SignInComponent} from './auth/signin/signin.component';
 import {SignUpComponent} from './auth/signup/signup.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {DropdownModule} from "ngx-dropdown";
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
         FormsModule,
         BrowserModule,
         ReactiveFormsModule,
-        RouterModule.forRoot(routes)
+        RouterModule.forRoot(routes),
+        DropdownModule
     ],
     bootstrap: [AppComponent]
 })
