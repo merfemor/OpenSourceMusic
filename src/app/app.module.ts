@@ -17,6 +17,7 @@ import {SignInComponent} from './auth/signin/signin.component';
 import {SignUpComponent} from './auth/signup/signup.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DropdownModule} from "ngx-dropdown";
+import {UserService} from "./user.service";
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import {DropdownModule} from "ngx-dropdown";
         RouterModule.forRoot(routes),
         DropdownModule
     ],
+    providers: [UserService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

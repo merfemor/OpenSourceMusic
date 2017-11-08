@@ -7,8 +7,7 @@ import {AuthorizationStatus} from "../../api";
 @Component({
     selector: 'app-auth',
     templateUrl: './signin.component.html',
-    styleUrls: ['./signin.component.sass'],
-    providers: [UserService]
+    styleUrls: ['./signin.component.sass']
 })
 export class SignInComponent {
     form = new FormGroup({

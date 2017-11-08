@@ -7,23 +7,18 @@ import {Router} from "@angular/router";
 @Component({
     selector: 'app-auth',
     templateUrl: './signup.component.html',
-    styleUrls: ['./signup.component.sass'],
-    providers: [UserService]
+    styleUrls: ['./signup.component.sass']
 })
 export class SignUpComponent {
     user = new User();
     form = new FormGroup({
         'username': new FormControl(this.user.username, [
             Validators.required,
-            function (c: FormControl) {
-                return SignUpComponent.isUnique(c, true);
-            }
+            (c: FormControl) => SignUpComponent.isUnique(c, true)
         ]),
         'email': new FormControl(this.user.email, [
             Validators.email,
-            function (c: FormControl) {
-                return SignUpComponent.isUnique(c, false);
-            }
+            (c: FormControl) => SignUpComponent.isUnique(c, false)
         ]),
         'password': new FormControl(this.user.password, [
             Validators.required,
