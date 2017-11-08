@@ -5,21 +5,22 @@ header
   .content
     position: relative
 
-
-.auth-div
+.float-right
   float: right
-  height: 100%
-  position: absolute
-  right: 0
+
+.right-menu
+  @extend .float-right
   > div
     background: #66BB6A
     padding: 5px
     float: left
-  .sign-in
-    border-radius: 0 0 0 7px
-    margin-right: 2px
-  .sign-up
-    border-radius: 0 0 7px 0
+
+.sign-in
+  border-radius: 0 0 0 7px
+  margin-right: 2px
+
+.sign-up
+  border-radius: 0 0 7px 0
 
 .search
   height: 5vh
@@ -37,17 +38,22 @@ input[type="search"]
     opacity: 1
 
 button
-  border-radius: 0 5px 5px 0
-  height: 100%
   padding: 8px 13px
-  background: #66BB6A
+  background-color: transparent
   border: 0
+
+.hv-green
+  background: #66BB6A
   transition: background .4s ease
   &:hover
     background: #81C784
-  img
-    height: 17px
-    width: auto
+
+button > img
+  height: 17px
+  width: auto
+
+#search-field-button
+  border-radius: 0 5px 5px 0
 
 .link-div
   transition: background-color 0.25s ease-out
@@ -55,3 +61,33 @@ button
   &:hover
     background-color: #4CAF50
     outline-offset: -10px
+
+ul.dropdown-menu
+  display: none
+  margin-top: 8px
+  padding-top: 5px
+  padding-bottom: 5px
+  list-style: none
+  background-color: #fff
+  border: 1px solid rgba(27, 31, 35, 0.15)
+  padding-left: 0
+  font-size: large
+  font-weight: normal
+  border-radius: 4px
+  box-shadow: 0 3px 12px rgba(27, 31, 35, 0.15)
+  li
+    padding: 4px 10px 4px 15px
+  li:hover
+    color: #fff
+    background-color: #4CAF50
+    cursor: pointer
+
+.dropdown-button
+  font-size: x-large
+
+.open
+  position: static
+  ul
+    display: inline
+    position: absolute
+    right: 0
