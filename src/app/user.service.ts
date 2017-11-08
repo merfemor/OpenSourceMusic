@@ -3,7 +3,17 @@ import {AuthorizationStatus, User} from "./api";
 
 @Injectable()
 export class UserService {
-    private user: User;
+    private user: User = UserService.returnTestUser();
+
+    public static returnTestUser(): User {
+        return {
+            username: 'lenon',
+            email: 'lenon@beatles.the',
+            firstName: 'John',
+            lastName: 'Lenon',
+            password: '1234567aA'
+        };
+    }
 
     public static isEmailExists(email: string): boolean {
         return false;
