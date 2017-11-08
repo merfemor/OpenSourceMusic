@@ -5,11 +5,8 @@ header
   .content
     position: relative
 
-.float-right
+.right-menu > *
   float: right
-
-.right-menu
-  @extend .float-right
   > div
     background: #66BB6A
     padding: 5px
@@ -22,18 +19,19 @@ header
 .sign-up
   border-radius: 0 0 7px 0
 
-.search
-  height: 5vh
+#search-block
+  display: inline-flex
+  input
+    width: 30vw
+    padding: 0 10px
+    border-radius: 5px 0 0 5px
+  button
+    border-radius: 0 5px 5px 0
 
-input[type="search"]
-  height: 100%
-  width: 30vw
-  float: left
+input
   opacity: 0.9
   transition: opacity 0.3s ease-out
-  padding: 0 12px
   border: 0
-  border-radius: 5px 0 0 5px
   &:focus
     opacity: 1
 
@@ -41,19 +39,16 @@ button
   padding: 8px 13px
   background-color: transparent
   border: 0
+  height: 100%
+  img
+    height: 17px
+    width: auto
 
 .hv-green
   background: #66BB6A
   transition: background .4s ease
   &:hover
     background: #81C784
-
-button > img
-  height: 17px
-  width: auto
-
-#search-field-button
-  border-radius: 0 5px 5px 0
 
 .link-div
   transition: background-color 0.25s ease-out

@@ -1,41 +1,35 @@
 <header>
     <div class="content">
         <div class="right-menu" *ngIf="!(userService.isLogged())">
-            <div class="link-div sign-in">
-                <a class="link-btn-light" routerLink="/join/signin">Sign In</a>
+            <div class="link-div sign-in link-btn-light" routerLink="/join/signin">Sign In</div>
+            <div class="link-div sign-up link-btn-light" routerLink="/join/signup">Sign Up</div>
+        </div>
+
+        <div class="right-menu" *ngIf="userService.isLogged()">
+            <div class="dropdown" dropdown>
+                <button class="dropdown-button link-btn-light link-div" dropdown-open>
+                    <img src="assets/img/menu-icon.svg">
+                </button>
+                <ul class="dropdown-menu-div dropdown-menu">
+                    <li routerLink="/profile">Profile</li>
+                    <li routerLink="/settings">Settings</li>
+                    <li>Log out</li>
+                </ul>
             </div>
-            <div class="link-div sign-up">
-                <a class="link-btn-light" routerLink="/join/signup">Sign Up</a>
+
+            <div class="dropdown" dropdown>
+                <button class="dropdown-button link-btn-light link-div" dropdown-open>+</button>
+
+                <ul class="dropdown-menu-div dropdown-menu">
+                    <li>New group</li>
+                    <li>New project</li>
+                </ul>
             </div>
         </div>
-
-        <div class="float-right dropdown" dropdown *ngIf="userService.isLogged()">
-            <button class="dropdown-button link-btn-light link-div" dropdown-open><img src="assets/img/menu-icon.svg">
-            </button>
-            <ul class="dropdown-menu-div dropdown-menu">
-                <li routerLink="/profile">Profile</li>
-                <li routerLink="/settings">Settings</li>
-                <li>Log out</li>
-            </ul>
-        </div>
-
-        <div class="float-right dropdown" dropdown *ngIf="userService.isLogged()">
-            <button class="dropdown-button link-btn-light link-div" dropdown-open>+</button>
-
-            <ul class="dropdown-menu-div dropdown-menu">
-                <li>New group</li>
-                <li>New project</li>
-            </ul>
-        </div>
-
         <div class="table">
-            <div class="link-div">
-                <a class="link-btn-light" routerLink="news">News</a>
-            </div>
-            <div class="link-div">
-                <a class="link-btn-light" routerLink="group">Groups</a>
-            </div>
-            <div class="search">
+            <div class="link-div link-btn-light" routerLink="news">News</div>
+            <div class="link-div link-btn-light" routerLink="group">Groups</div>
+            <div id="search-block">
                 <input type="search" placeholder="Search for groups and projects">
                 <button class="hv-green" id="search-field-button"><img src="assets/img/search-icon.png"></button>
             </div>
