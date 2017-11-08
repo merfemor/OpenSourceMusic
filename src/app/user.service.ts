@@ -15,21 +15,23 @@ export class UserService {
 
     public signUp(user: User): boolean {
         this.user = user;
-        return false; // unsuccessful
+        return false;
     }
 
     public signIn(username_or_email: string, password: string): AuthorizationStatus {
-        this.user = new User();
+        let user = new User();
         if (UserService.isEmailExists(username_or_email)) {
-            this.user.email = username_or_email;
+            user.email = username_or_email;
         } else if (UserService.isUsernameExists(username_or_email)) {
-            this.user.username = username_or_email;
+            user.username = username_or_email;
         } else {
             return {
                 successful: false,
                 description: 'Incorrect username or email'
             }
         }
+        user.password = password;
+        this.user = user;
 
         return {
             successful: false,
