@@ -1,0 +1,34 @@
+.cover-block
+  padding: 24px 0 0
+  border-bottom: 1px solid #e5e5e5
+  text-align: center
+  background: #fafafa
+  line-height: 1.4
+  color: #2e2e2e
+
+.cover-full-name
+  color: #2e2e2e
+  font-size: x-large
+
+.middle-dot-divider
+  &::after
+    content: ""
+    padding: 0 8px
+    font-weight: 600
+
+.table
+  justify-content: center
+  display: flex
+
+  > *
+    padding: 15px 30px 13px 18px
+    font-size: medium
+    color: #707070
+    border-bottom: 2px solid transparent
+    text-decoration: none
+    transition: background-color 100ms linear, color 100ms linear, border 100ms linear
+    &:hover
+      text-decoration: none
+      color: #000
+      cursor: pointer
+      border-bottom: 2px solid #c4c4c4

@@ -1,4 +1,17 @@
-<!-- TODO: Make profile content -->
-<h1>This is profile information.</h1>
-<h2>Nickname: {{user.nickname}}</h2>
-<a routerLink="/settings">Settings</a>
+<div class="cover-block">
+    <div class="user-info">
+        <div class="cover-full-name">
+            {{user.firstName}} {{user.lastName}}
+        </div>
+        <div class="cover-desc member-date">
+            <span class="middle-dot-divider">@{{user.username}}</span>
+            <span class="middle-dot-divider">{{user.email}}</span>
+        </div>
+        <div class="scrolling-tabs-container table">
+            <div routerLink="activity">Activity</div>
+            <div routerLink="groups">Groups</div>
+            <div routerLink="personal_projects">Personal projects</div>
+        </div>
+    </div>
+    <router-outlet></router-outlet>
+</div>

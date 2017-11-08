@@ -1,26 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
+import {User} from "../api";
+import {UserService} from "../user.service";
 
 @Component({
     selector: 'app-profile',
     templateUrl: './profile.component.html',
-    styleUrls: ['./profile.component.sass']
+    styleUrls: ['./profile.component.sass'],
+    providers: [UserService]
 })
-export class ProfileComponent implements OnInit {
-    user = new User("sample_nickname");
+export class ProfileComponent {
+    user: User = this.userService.getUser();
 
-    constructor() {
-    }
-
-    ngOnInit() {
-    }
-
-}
-
-
-export class User {
-    public nickname: string;
-
-    constructor(nickname) {
-        this.nickname = nickname;
+    constructor(private userService: UserService) {
     }
 }
