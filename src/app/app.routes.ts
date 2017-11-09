@@ -2,9 +2,9 @@ import {Routes} from "@angular/router";
 import {ProfileComponent} from "./profile/profile.component";
 import {GroupComponent} from "./group/group.component";
 import {SettingsComponent} from "./profile/settings/settings.component";
-import {AuthComponent} from "./auth/auth.component";
-import {SignInComponent} from "./auth/signin/signin.component";
-import {SignUpComponent} from "./auth/signup/signup.component";
+import {AuthComponent} from "./profile/auth/auth.component";
+import {SignInComponent} from "./profile/auth/signin/signin.component";
+import {SignUpComponent} from "./profile/auth/signup/signup.component";
 
 export const routes: Routes = [
     {

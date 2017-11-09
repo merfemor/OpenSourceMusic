@@ -1,24 +1,28 @@
-<h1>User Settings:</h1>
+<div class="all-content">
+    <h1>Change your profile settings</h1>
+    <form [formGroup]="form" (ngSubmit)="submit()">
 
-<form>
-    <p>
-        <label>
-            <span>Nickname:</span>
-            <input type="text" name="nickname">
-            {{user.nickname}}
-        </label>
-    </p>
-    <p>
-        <label>
-            <span>First name:</span>
-            <input type="text" name="nickname">
-        </label>
-    </p>
-    <p>
-        <label>
-            <span>Last name:</span>
-            <input type="text" name="nickname">
-        </label>
-    </p>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input formControlName="username" class="form-control" id="username" type="text">
+            <div class="form-invalid-text"
+                 *ngIf="form.get('username').invalid&&form.get('username').touched">
+                <span *ngIf="form.get('username')['errors']['required']">Username is required</span>
+                <span *ngIf="!form.get('username')['errors']['required'] && form.get('username')['errors']['isUnique']">Such a username exists, try another one</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input formControlName="email" class="form-control" id="email" type="email" placeholder="user@example.com">
+            <div class="form-invalid-text"
+                 *ngIf="form.get('email').invalid&&form.get('email').touched">
+                <span *ngIf="form.get('email')['errors']['email']">Invalid email format</span>
+                <span *ngIf="!form.get('email')['errors']['email'] && form.get('email')['errors']['isUnique']">Such a email exists, try another one</span>
+            </div>
+        </div>
 
-</form>
+        <button [disabled]="form.invalid" type="submit" class="btn-submit" id="signup_button">
+            Update profile
+        </button>
+    </form>
+</div>

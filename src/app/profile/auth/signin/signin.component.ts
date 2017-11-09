@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {UserService} from "../../user.service";
+import {UserService} from "../../../user.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {AuthorizationStatus} from "../../api";
+import {AuthorizationStatus} from "../../../api";
 
 @Component({
     selector: 'app-auth',
