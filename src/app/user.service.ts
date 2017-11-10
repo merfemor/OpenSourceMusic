@@ -15,11 +15,7 @@ export class UserService {
         };
     }
 
-    public static isEmailExists(email: string): boolean {
-        return false;
-    }
-
-    public static isUsernameExists(username: string): boolean {
+    public static isLoginExists(login: string): boolean {
         return false;
     }
 
@@ -28,12 +24,12 @@ export class UserService {
         return false;
     }
 
-    public signIn(username_or_email: string, password: string): AuthorizationStatus {
+    public signIn(login: string, password: string): AuthorizationStatus {
         let user = new User();
-        if (UserService.isEmailExists(username_or_email)) {
-            user.email = username_or_email;
-        } else if (UserService.isUsernameExists(username_or_email)) {
-            user.username = username_or_email;
+        if (UserService.isLoginExists(login)) {
+            user.email = login;
+        } else if (UserService.isLoginExists(login)) {
+            user.username = login;
         } else {
             return {
                 successful: false,
