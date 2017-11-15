@@ -28,6 +28,12 @@ export class SettingsComponent implements OnInit {
             'email': new FormControl(this.user.email,
                 Validators.email,
                 LoginUniqueValidator.createValidator(this.userService)
+            ),
+            'firstName': new FormControl(this.user.firstName,
+                Validators.pattern("[a-zA-Z]+")
+            ),
+            'lastName': new FormControl(this.user.lastName,
+                Validators.pattern("[a-zA-Z]+")
             )
         });
     }
