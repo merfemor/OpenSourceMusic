@@ -35,10 +35,12 @@ export class SettingsComponent implements OnInit {
     submit() {
         this.user.email = this.form.get('email').value;
         this.user.username = this.form.get('username').value;
-        if (this.userService.updateProfile(this.user)) {
-            this.router.navigateByUrl("/");
-        } else {
-            alert('Unknown error during updating. Try again.');
-        }
+
+        this.userService.updateProfile(this.user).subscribe(u => {
+            if (!u.successful) {
+                alert(u.description + "\nPlease try again");
+            }
+            this.user = this.userService.getUser();
+        });
     }
 }

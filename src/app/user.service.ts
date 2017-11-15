@@ -73,9 +73,23 @@ export class UserService {
         return false; // unsuccessful
     }
 
-    public updateProfile(user: User): User {
+    public updateProfile(user: User): Observable<AuthorizationStatus> {
         this.user = user;
-        return this.user;
+        return this.http.patch<User>(API_URL_ROOT + "users/" + user.id, user, {
+            headers: new HttpHeaders().set("Content-Type", "application/json")
+        }).map(u => {
+            console.log(u);
+            if (u) {
+                this.user = u;
+                return {successful: true};
+            } else {
+                console.log("ooops");
+                return {
+                    successful: false,
+                    description: "Unknown error"
+                };
+            }
+        });
     }
 
     public isLogged(): boolean {
