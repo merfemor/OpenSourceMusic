@@ -1,52 +1,58 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {User} from "../../api";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
 import {UserService} from "../../user.service";
-import {LoginUniqueValidator} from "../../validator";
+import {LoginChangedOrUniqueValidator} from "../../validator";
 
 @Component({
     selector: 'app-settings',
     templateUrl: './settings.component.html',
     styleUrls: ['./settings.component.sass']
 })
-export class SettingsComponent implements OnInit {
-    user: User;
-    form: FormGroup;
+export class SettingsComponent {
+    user: User = this.userService.getUser();
+    form: FormGroup = new FormGroup({
+        'username': new FormControl(this.user.username,
+            Validators.required,
+            LoginChangedOrUniqueValidator.createValidator(this.userService, this.user.username)
+        ),
+        'email': new FormControl(this.user.email,
+            Validators.email,
+            LoginChangedOrUniqueValidator.createValidator(this.userService, this.user.email)
+        ),
+        'firstName': new FormControl(this.user.firstName,
+            Validators.pattern("[a-zA-Z]*")
+        ),
+        'lastName': new FormControl(this.user.lastName,
+            Validators.pattern("[a-zA-Z]*")
+        )
+    });
 
-    constructor(private router: Router, private userService: UserService) {
-    }
-
-
-    ngOnInit() {
-        this.user = this.userService.getUser();
-        this.form = new FormGroup({
-            'username': new FormControl(this.user.username,
-                Validators.required,
-                LoginUniqueValidator.createValidator(this.userService)
-            ),
-            'email': new FormControl(this.user.email,
-                Validators.email,
-                LoginUniqueValidator.createValidator(this.userService)
-            ),
-            'firstName': new FormControl(this.user.firstName,
-                Validators.pattern("[a-zA-Z]+")
-            ),
-            'lastName': new FormControl(this.user.lastName,
-                Validators.pattern("[a-zA-Z]+")
-            )
-        });
+    constructor(private userService: UserService) {
     }
 
     submit() {
         this.user.email = this.form.get('email').value;
         this.user.username = this.form.get('username').value;
+        this.user.firstName = this.form.get('firstName').value;
+        this.user.lastName = this.form.get('lastName').value;
 
         this.userService.updateProfile(this.user).subscribe(u => {
+            this.user = this.userService.getUser();
             if (!u.successful) {
                 alert(u.description + "\nPlease try again");
             }
-            this.user = this.userService.getUser();
         });
+    }
+
+    public isNoChanges(): boolean {
+        let email = this.form.get('email').value;
+        let username = this.form.get('username').value;
+        let firstName = this.form.get('firstName').value;
+        let lastName = this.form.get('lastName').value;
+        return email == this.user.email &&
+            username == this.user.username &&
+            firstName == this.user.firstName &&
+            lastName == this.user.lastName;
     }
 }
