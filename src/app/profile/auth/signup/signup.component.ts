@@ -3,7 +3,7 @@ import {UserService} from "../../../user.service";
 import {User} from "../../../api";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {ProfileComponent} from "../../profile.component";
+import {LoginUniqueValidator} from "../../../validator";
 
 @Component({
     selector: 'app-auth',
@@ -13,14 +13,14 @@ import {ProfileComponent} from "../../profile.component";
 export class SignUpComponent {
     user = new User();
     form = new FormGroup({
-        'username': new FormControl(this.user.username, [
+        'username': new FormControl(this.user.username,
             Validators.required,
-            ProfileComponent.isLoginUnique
-        ]),
-        'email': new FormControl(this.user.email, [
+            LoginUniqueValidator.createValidator(this.userService)
+        ),
+        'email': new FormControl(this.user.email,
             Validators.email,
-            ProfileComponent.isLoginUnique
-        ]),
+            LoginUniqueValidator.createValidator(this.userService)
+        ),
         'password': new FormControl(this.user.password, [
             Validators.required,
             Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{9,}$')
@@ -34,10 +34,15 @@ export class SignUpComponent {
         this.user.email = this.form.get('email').value;
         this.user.username = this.form.get('username').value;
         this.user.password = this.form.get('password').value;
-        if (this.userService.signUp(this.user)) {
-            this.router.navigateByUrl("/");
-        } else {
-            alert('Unknown error during authorization. Try again.');
-        }
+        this.userService.signUp(this.user, status => {
+            if (status) {
+                this.router.navigateByUrl("/");
+            } else {
+                if (status.description)
+                    alert(status.description);
+                else
+                    alert('Unknown error during authorization. Try again.');
+            }
+        });
     }
 }
