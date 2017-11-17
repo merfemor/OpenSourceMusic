@@ -1,9 +1,7 @@
 import {Injectable} from '@angular/core';
 import {API_URL_ROOT, RequestStatus, User} from "./api";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {Observable} from "rxjs/Observable";
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/merge';
+import {Observable} from "rxjs/Rx";
 import {CookieService} from "ngx-cookie-service";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Subscription} from "rxjs/Subscription";
@@ -35,7 +33,7 @@ export class UserService {
                 this.saveSessionInCookies();
                 return {successful: true};
             }
-            return {successful: false, description: 'Incorrect login or password'};
+            return {successful: false, description: 'Incorrect username or password'};
         });
     }
 
@@ -156,6 +154,12 @@ export class UserService {
             this.userChanges = new BehaviorSubject(u);
         else
             this.userChanges.next(u);
+    }
+
+    public getUserInfo(username: string): Observable<User> {
+        return this.http.get<User[]>(API_URL_ROOT + "users", {
+            params: new HttpParams().set("username", username)
+        }).map(users => users.length != 0 ? users[0] : null);
     }
 
     private restoreSessionFromCookies(): User {

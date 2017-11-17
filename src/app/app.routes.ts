@@ -9,7 +9,7 @@ import {LoggedInResolver, NotLoggedInResolver} from "./app.resolvers";
 
 export const routes: Routes = [
     {
-        path: "profile",
+        path: "profile/:username",
         component: ProfileComponent
     },
     {
@@ -43,7 +43,7 @@ export const routes: Routes = [
     },
     {
         path: "**",
-        redirectTo: "profile",
+        redirectTo: "group",
         pathMatch: "prefix"
     }
 ];
