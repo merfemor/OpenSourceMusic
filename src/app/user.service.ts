@@ -26,8 +26,6 @@ export class UserService {
                 .set("password", password)
         }).map(data => {
             let u: User = data.filter(u => u.username == login || u.email == login).pop();
-
-            console.log(u);
             if (u) {
                 this.setUser(u);
                 this.saveSessionInCookies(u);
@@ -48,6 +46,13 @@ export class UserService {
             successful: false,
             description: "Such a nickname or email has already been registered"
         };
+
+        if (user.firstName == null)
+            user.firstName = "";
+        if (user.lastName == null)
+            user.lastName = "";
+
+
         this.isLoginExists(user.email).subscribe(exists => {
             if (exists) {
                 callback(unsuccessful);
@@ -84,12 +89,10 @@ export class UserService {
         return this.http.patch<User>(API_URL_ROOT + "users/" + user.id, user, {
             headers: new HttpHeaders().set("Content-Type", "application/json")
         }).map(u => {
-            console.log(u);
             if (u) {
                 this.setUser(u);
                 return {successful: true};
             } else {
-                console.log("ooops");
                 return {
                     successful: false,
                     description: "Unknown error"
@@ -120,7 +123,7 @@ export class UserService {
         let password = this.cookieService.get("pass");
 
         if (!id || !password) {
-            console.log("Failed to restore session from cookie: cookies not set");
+            console.log("Failed to restore session from cookies: cookies not set");
             return;
         }
         this.http.get<User[]>(API_URL_ROOT + "users", {
@@ -129,7 +132,7 @@ export class UserService {
                 .set("password", password)
         }).subscribe(data => {
             if (data.length != 1) {
-                console.log("Failed to restore session from cookie: bad cookie values");
+                console.log("Failed to restore session from cookies: bad cookie values");
                 this.clearCookies();
                 return;
             }
