@@ -3,7 +3,7 @@ import {UserService} from "../../../user.service";
 import {User} from "../../../api";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {LoginUniqueValidator} from "../../../validator";
+import {LoginUniqueValidator, UsernameRegexp} from "../../../validator";
 
 @Component({
     selector: 'app-auth',
@@ -13,15 +13,17 @@ import {LoginUniqueValidator} from "../../../validator";
 export class SignUpComponent {
     user = new User();
     form = new FormGroup({
-        'username': new FormControl(this.user.username,
-            Validators.required,
+        username: new FormControl(this.user.username, [
+                Validators.required,
+                Validators.pattern(UsernameRegexp)
+            ],
             LoginUniqueValidator.createValidator(this.userService)
         ),
-        'email': new FormControl(this.user.email,
+        email: new FormControl(this.user.email,
             Validators.email,
             LoginUniqueValidator.createValidator(this.userService)
         ),
-        'password': new FormControl(this.user.password, [
+        password: new FormControl(this.user.password, [
             Validators.required,
             Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{9,}$')
         ])

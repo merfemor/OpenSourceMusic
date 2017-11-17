@@ -4,6 +4,8 @@ import {Observable} from "rxjs/Observable";
 import {of} from 'rxjs/observable/of';
 import 'rxjs/add/operator/map';
 
+export const UsernameRegexp = new RegExp("^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+$");
+
 export class LoginUniqueValidator {
 
     public static createValidator(userService: UserService): ((c: AbstractControl) => Observable<ValidationErrors>) {

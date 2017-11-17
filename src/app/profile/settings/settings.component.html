@@ -11,6 +11,10 @@
                 <span *ngIf="!form.get('username')['errors']['required'] &&
                                 form.get('username')['errors']['isLoginUnique']">
                     Such a username exists, try another one</span>
+                <span *ngIf="!form.get('username')['errors']['required'] &&
+                             !form.get('username')['errors']['isLoginUnique'] &&
+                              form.get('username')['errors']['pattern']">
+                    Only English letters, '_' and '.' are allowed</span>
             </div>
         </div>
         <div class="form-group">

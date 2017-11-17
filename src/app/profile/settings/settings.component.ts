@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {User} from "../../api";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../user.service";
-import {LoginChangedOrUniqueValidator} from "../../validator";
+import {LoginChangedOrUniqueValidator, UsernameRegexp} from "../../validator";
 
 @Component({
     selector: 'app-settings',
@@ -12,18 +12,10 @@ import {LoginChangedOrUniqueValidator} from "../../validator";
 export class SettingsComponent {
     user: User;
     form: FormGroup = new FormGroup({
-        'username': new FormControl('',
-            Validators.required
-        ),
-        'email': new FormControl('',
-            Validators.email
-        ),
-        'firstName': new FormControl('',
-            Validators.pattern("[a-zA-Z]*")
-        ),
-        'lastName': new FormControl('',
-            Validators.pattern("[a-zA-Z]*")
-        )
+        username: new FormControl('', Validators.required),
+        email: new FormControl(),
+        firstName: new FormControl(),
+        lastName: new FormControl()
     });
 
     constructor(private userService: UserService) {
@@ -32,25 +24,25 @@ export class SettingsComponent {
             if (!u)
                 return;
             this.form = new FormGroup({
-                'username': new FormControl(this.user.username,
-                    Validators.required,
+                username: new FormControl(this.user.username,
+                    [Validators.required, Validators.pattern(UsernameRegexp)],
                     LoginChangedOrUniqueValidator.createValidator(this.userService, this.user.username)
                 ),
-                'email': new FormControl(this.user.email,
+                email: new FormControl(this.user.email,
                     Validators.email,
                     LoginChangedOrUniqueValidator.createValidator(this.userService, this.user.email)
                 ),
-                'firstName': new FormControl(this.user.firstName,
+                firstName: new FormControl(this.user.firstName,
                     Validators.pattern("[a-zA-Z]*")
                 ),
-                'lastName': new FormControl(this.user.lastName,
+                lastName: new FormControl(this.user.lastName,
                     Validators.pattern("[a-zA-Z]*")
                 )
             });
         });
     }
 
-    submit() {
+    public submit() {
         this.user.email = this.form.get('email').value;
         this.user.username = this.form.get('username').value;
         this.user.firstName = this.form.get('firstName').value;
