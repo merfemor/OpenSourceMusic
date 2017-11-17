@@ -8,8 +8,9 @@ import {UserService} from "../user.service";
     styleUrls: ['./profile.component.sass']
 })
 export class ProfileComponent {
-    user: User = this.userService.getUser();
+    user: User;
 
     constructor(private userService: UserService) {
+        this.userService.subscribeOnUserChange(u => this.user = u);
     }
 }

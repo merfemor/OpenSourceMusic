@@ -1,11 +1,11 @@
 <div class="cover-block">
     <div class="user-info">
         <div class="cover-full-name">
-            {{user.firstName}} {{user.lastName}}
+            {{user?.firstName}} {{user?.lastName}}
         </div>
         <div class="cover-desc member-date">
-            <span class="middle-dot-divider">@{{user.username}}</span>
-            <span class="middle-dot-divider">{{user.email}}</span>
+            <span class="middle-dot-divider">@{{user?.username}}</span>
+            <span class="middle-dot-divider">{{user?.email}}</span>
         </div>
         <div class="scrolling-tabs-container table">
             <div routerLink="activity">Activity</div>

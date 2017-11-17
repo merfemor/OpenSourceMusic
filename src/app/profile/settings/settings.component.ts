@@ -10,25 +10,44 @@ import {LoginChangedOrUniqueValidator} from "../../validator";
     styleUrls: ['./settings.component.sass']
 })
 export class SettingsComponent {
-    user: User = this.userService.getUser();
+    user: User;
     form: FormGroup = new FormGroup({
-        'username': new FormControl(this.user.username,
-            Validators.required,
-            LoginChangedOrUniqueValidator.createValidator(this.userService, this.user.username)
+        'username': new FormControl('',
+            Validators.required
         ),
-        'email': new FormControl(this.user.email,
-            Validators.email,
-            LoginChangedOrUniqueValidator.createValidator(this.userService, this.user.email)
+        'email': new FormControl('',
+            Validators.email
         ),
-        'firstName': new FormControl(this.user.firstName,
+        'firstName': new FormControl('',
             Validators.pattern("[a-zA-Z]*")
         ),
-        'lastName': new FormControl(this.user.lastName,
+        'lastName': new FormControl('',
             Validators.pattern("[a-zA-Z]*")
         )
     });
 
     constructor(private userService: UserService) {
+        this.userService.subscribeOnUserChange(u => {
+            this.user = u;
+            if (!u)
+                return;
+            this.form = new FormGroup({
+                'username': new FormControl(this.user.username,
+                    Validators.required,
+                    LoginChangedOrUniqueValidator.createValidator(this.userService, this.user.username)
+                ),
+                'email': new FormControl(this.user.email,
+                    Validators.email,
+                    LoginChangedOrUniqueValidator.createValidator(this.userService, this.user.email)
+                ),
+                'firstName': new FormControl(this.user.firstName,
+                    Validators.pattern("[a-zA-Z]*")
+                ),
+                'lastName': new FormControl(this.user.lastName,
+                    Validators.pattern("[a-zA-Z]*")
+                )
+            });
+        });
     }
 
     submit() {
@@ -38,7 +57,6 @@ export class SettingsComponent {
         this.user.lastName = this.form.get('lastName').value;
 
         this.userService.updateProfile(this.user).subscribe(u => {
-            this.user = this.userService.getUser();
             if (!u.successful) {
                 alert(u.description + "\nPlease try again");
             }
