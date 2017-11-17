@@ -1,5 +1,5 @@
 <div class="all-content">
-    <h1>Change your profile settings</h1>
+    <h2>Change your profile settings</h2>
     <form [formGroup]="form" (ngSubmit)="submit()">
 
         <div class="form-group">
@@ -45,8 +45,44 @@
             </div>
         </div>
 
-        <button [disabled]="form.invalid || isNoChanges()" type="submit" class="btn-submit" id="signup_button">
+        <button [disabled]="form.invalid || isNoChanges()" type="submit" class="btn-submit">
             Update profile
+        </button>
+    </form>
+
+
+    <h2>Change your password</h2>
+    <form [formGroup]="passwordForm" (ngSubmit)="submitChangePassword()">
+        <div class="form-group">
+            <label for="oldPassword">Current password</label>
+            <input formControlName="oldPassword" class="form-control" id="oldPassword" type="password">
+            <div class="form-invalid-text"
+                 *ngIf="passwordForm.get('oldPassword').invalid && passwordForm.get('oldPassword').dirty">
+                <span>You need to enter your current password</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="newPassword">New password</label>
+            <input formControlName="newPassword" class="form-control" id="newPassword" type="password">
+            <p class="note">Create a password from the numbers and letters of the upper and lower case.</p>
+            <div class="form-invalid-text"
+                 *ngIf="passwordForm.get('newPassword').invalid &&
+                        passwordForm.get('newPassword').touched &&
+                        passwordForm.get('newPassword').dirty">
+            <span>Password must contain at least one letter in lower case, one letter in uppercase and one digit.
+            The minimum password length is 9 characters</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="newPasswordConfirm">New password confirmation</label>
+            <input formControlName="newPasswordConfirm" class="form-control" id="newPasswordConfirm" type="password">
+            <div class="form-invalid-text"
+                 *ngIf="passwordForm.get('newPasswordConfirm').invalid && passwordForm.get('newPasswordConfirm').touched">
+                <span>Passwords are different</span>
+            </div>
+        </div>
+        <button [disabled]="passwordForm.invalid" type="submit" class="btn-submit">
+            Change password
         </button>
     </form>
 </div>

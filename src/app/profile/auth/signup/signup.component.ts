@@ -37,7 +37,7 @@ export class SignUpComponent {
         this.user.username = this.form.get('username').value;
         this.user.password = this.form.get('password').value;
         this.userService.signUp(this.user, status => {
-            if (status) {
+            if (status.successful) {
                 this.router.navigateByUrl("/");
             } else {
                 if (status.description)

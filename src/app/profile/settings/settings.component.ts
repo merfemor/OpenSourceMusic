@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {User} from "../../api";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../user.service";
-import {LoginChangedOrUniqueValidator, UsernameRegexp} from "../../validator";
+import {LoginChangedOrUniqueValidator, PasswordRegexp, UsernameRegexp} from "../../validator";
 
 @Component({
     selector: 'app-settings',
@@ -18,11 +18,18 @@ export class SettingsComponent {
         lastName: new FormControl()
     });
 
+    passwordForm: FormGroup = new FormGroup({
+        oldPassword: new FormControl('', Validators.required),
+        newPassword: new FormControl(),
+        newPasswordConfirm: new FormControl()
+    });
+
     constructor(private userService: UserService) {
         this.userService.subscribeOnUserChange(u => {
             this.user = u;
             if (!u)
                 return;
+
             this.form = new FormGroup({
                 username: new FormControl(this.user.username,
                     [Validators.required, Validators.pattern(UsernameRegexp)],
@@ -38,6 +45,20 @@ export class SettingsComponent {
                 lastName: new FormControl(this.user.lastName,
                     Validators.pattern("[a-zA-Z]*")
                 )
+            });
+
+            this.passwordForm = new FormGroup({
+                oldPassword: new FormControl('',
+                    Validators.required
+                ),
+                newPassword: new FormControl('', [
+                    Validators.required,
+                    Validators.pattern(PasswordRegexp)]
+                ),
+                newPasswordConfirm: new FormControl('', [
+                    Validators.required,
+                    c => c.value === this.passwordForm.get('newPassword').value ? null : {differentPasswords: {}}
+                ])
             });
         });
     }
@@ -66,5 +87,9 @@ export class SettingsComponent {
             username == this.user.username &&
             firstName == this.user.firstName &&
             lastName == this.user.lastName;
+    }
+
+    public submitChangePassword() {
+        console.log("changing pass...");
     }
 }
