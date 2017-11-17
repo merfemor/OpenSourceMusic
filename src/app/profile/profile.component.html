@@ -1,7 +1,7 @@
-<div class="cover-block">
+<div class="cover-block" *ngIf="user">
     <div class="user-info">
         <div class="cover-full-name">
-            {{user?.firstName}} {{user?.lastName}}
+            {{user.firstName}} {{user.lastName}}
         </div>
         <div class="cover-desc member-date">
             <span class="middle-dot-divider"><b>@{{user?.username}}</b></span>
@@ -14,4 +14,10 @@
         </div>
     </div>
     <router-outlet></router-outlet>
+</div>
+
+<div *ngIf="!user" class="user-not-found-cont">
+    <h1 class="user-not-found-title">Unable to find that user.</h1>
+    <p class="user-not-found-descr">
+        User @<b>{{username}}</b> changed his nickname, <br>or a user with such a nickname does not exist.</p>
 </div>

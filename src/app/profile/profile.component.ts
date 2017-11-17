@@ -17,14 +17,7 @@ export class ProfileComponent implements OnDestroy {
     constructor(private userService: UserService, private activatedRoute: ActivatedRoute) {
         this.routeSubscription = this.activatedRoute.params.subscribe(params => {
             this.username = params['username'];
-
-            this.userService.getUserInfo(this.username).subscribe(user => {
-                this.user = user;
-                if (!user) {
-                    // TODO: create profile not found page and navigate to it
-                }
-            })
-
+            this.userService.getUserInfo(this.username).subscribe(user => this.user = user);
         })
     }
 
