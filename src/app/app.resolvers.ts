@@ -14,3 +14,17 @@ export class NotLoggedInResolver {
         });
     }
 }
+
+@Injectable()
+export class LoggedInResolver {
+    constructor(private userService: UserService, private router: Router) {
+    }
+
+    resolve(): void {
+        this.userService.onSessionLoaded(() => {
+            console.log("in res");
+            if (this.userService.isLogged())
+                this.router.navigate(['/']);
+        });
+    }
+}

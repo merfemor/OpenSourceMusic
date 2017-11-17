@@ -5,7 +5,7 @@ import {SettingsComponent} from "./profile/settings/settings.component";
 import {AuthComponent} from "./profile/auth/auth.component";
 import {SignInComponent} from "./profile/auth/signin/signin.component";
 import {SignUpComponent} from "./profile/auth/signup/signup.component";
-import {NotLoggedInResolver} from "./app.resolvers";
+import {LoggedInResolver, NotLoggedInResolver} from "./app.resolvers";
 
 export const routes: Routes = [
     {
@@ -43,6 +43,7 @@ export const routes: Routes = [
                 path: "signup",
                 component: SignUpComponent
             }
-        ]
+        ],
+        resolve: [LoggedInResolver]
     }
 ];
