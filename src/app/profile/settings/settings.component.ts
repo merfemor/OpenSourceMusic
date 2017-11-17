@@ -56,6 +56,8 @@ export class SettingsComponent {
     }
 
     public isNoChanges(): boolean {
+        if (!this.user)
+            return true;
         let email = this.form.get('email').value;
         let username = this.form.get('username').value;
         let firstName = this.form.get('firstName').value;

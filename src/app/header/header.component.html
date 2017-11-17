@@ -1,6 +1,6 @@
 <header>
     <div class="content">
-        <div class="right-menu" *ngIf="!(userService.isLogged())">
+        <div class="right-menu" *ngIf="!userService.isLogged()">
             <div class="link-div sign-up link-btn-light" routerLink="/join/signup">Sign Up</div>
             <div class="link-div sign-in link-btn-light" routerLink="/join/signin">Sign In</div>
         </div>
@@ -13,7 +13,7 @@
                 <ul class="dropdown-menu-div dropdown-menu">
                     <li routerLink="/profile">Profile</li>
                     <li routerLink="/settings">Settings</li>
-                    <li>Log out</li>
+                    <li (click)="userService.logOut()">Log out</li>
                 </ul>
             </div>
 
