@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {API_URL_ROOT, AuthorizationStatus, User} from "./api";
+import {API_URL_ROOT, RequestStatus, User} from "./api";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map';
@@ -20,7 +20,7 @@ export class UserService {
         return this.userChanges.getValue();
     }
 
-    public signIn(login: string, password: string): Observable<AuthorizationStatus> {
+    public signIn(login: string, password: string): Observable<RequestStatus> {
         return this.http.get<User[]>(API_URL_ROOT + "users", {
             params: new HttpParams()
                 .set("password", password)
@@ -28,7 +28,7 @@ export class UserService {
             let u: User = data.filter(u => u.username == login || u.email == login).pop();
             if (u) {
                 this.setUser(u);
-                this.saveSessionInCookies(u);
+                this.saveSessionInCookies();
                 return {successful: true};
             }
             return {successful: false, description: 'Incorrect login or password'};
@@ -41,7 +41,7 @@ export class UserService {
         }).map(data => data.length != 0);
     }
 
-    public signUp(user: User, callback: (status: AuthorizationStatus) => any): void {
+    public signUp(user: User, callback: (status: RequestStatus) => any): void {
         let unsuccessful = {
             successful: false,
             description: "Such a nickname or email has already been registered"
@@ -80,16 +80,12 @@ export class UserService {
         this.setUser(null);
     }
 
-    private clearCookies() {
-        this.cookieService.delete("id");
-        this.cookieService.delete("pass");
-    }
-
-    public updateProfile(user: User): Observable<AuthorizationStatus> {
+    public updateProfile(user: User): Observable<RequestStatus> {
         return this.http.patch<User>(API_URL_ROOT + "users/" + user.id, user, {
             headers: new HttpHeaders().set("Content-Type", "application/json")
         }).map(u => {
             if (u) {
+                console.log("set: " + u);
                 this.setUser(u);
                 return {successful: true};
             } else {
@@ -101,9 +97,37 @@ export class UserService {
         });
     }
 
-    private saveSessionInCookies(user: User): void {
-        this.cookieService.set("id", user.id.toString());
-        this.cookieService.set("pass", user.password);
+    public changePassword(oldPassword: string, newPassword: string): Observable<RequestStatus> {
+        return this.http.get<User[]>(API_URL_ROOT + "users", {
+            params: new HttpParams().set("id", this.getUser().id.toString())
+        }).map(users => {
+            if (users.length == 0) {
+                return {successful: false, description: "Failed to get current user info"};
+            }
+            return users[0].password === oldPassword ?
+                {successful: true} :
+                {successful: false, description: "Incorrect password"}
+        }).map(status => {
+            if (status.successful) {
+                let user = this.getUser();
+                user.password = newPassword;
+                this.updateProfile(user).subscribe(status => {
+                    if (status.successful)
+                        this.saveSessionInCookies();
+                });
+            }
+            return status;
+        });
+    }
+
+    private saveSessionInCookies(): void {
+        this.cookieService.set("id", this.getUser().id.toString(), 30, "/");
+        this.cookieService.set("pass", this.getUser().password);
+    }
+
+    private clearCookies() {
+        this.cookieService.delete("id");
+        this.cookieService.delete("pass");
     }
 
     public isLogged(): boolean {

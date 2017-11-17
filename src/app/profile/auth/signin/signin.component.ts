@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {UserService} from "../../../user.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {AuthorizationStatus} from "../../../api";
+import {RequestStatus} from "../../../api";
 
 @Component({
     selector: 'app-auth',
@@ -18,7 +18,7 @@ export class SignInComponent {
             Validators.required
         ])
     });
-    authStatus: AuthorizationStatus = null;
+    authStatus: RequestStatus = null;
 
     constructor(private router: Router, private userService: UserService) {
     }

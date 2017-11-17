@@ -81,6 +81,9 @@
                 <span>Passwords are different</span>
             </div>
         </div>
+        <div class="form-invalid-text" *ngIf="status && !status.successful">
+            <span>Failed to change password.<br>{{status?.description}}</span>
+        </div>
         <button [disabled]="passwordForm.invalid" type="submit" class="btn-submit">
             Change password
         </button>

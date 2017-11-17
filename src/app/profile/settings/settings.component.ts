@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {User} from "../../api";
+import {RequestStatus, User} from "../../api";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../user.service";
 import {LoginChangedOrUniqueValidator, PasswordRegexp, UsernameRegexp} from "../../validator";
@@ -24,11 +24,15 @@ export class SettingsComponent {
         newPasswordConfirm: new FormControl()
     });
 
+    status: RequestStatus;
+
     constructor(private userService: UserService) {
         this.userService.subscribeOnUserChange(u => {
             this.user = u;
             if (!u)
                 return;
+
+            console.log(u);
 
             this.form = new FormGroup({
                 username: new FormControl(this.user.username,
@@ -90,6 +94,8 @@ export class SettingsComponent {
     }
 
     public submitChangePassword() {
-        console.log("changing pass...");
+        let oldP = this.passwordForm.get('oldPassword').value;
+        let newP = this.passwordForm.get('newPassword').value;
+        this.userService.changePassword(oldP, newP).subscribe(status => this.status = status);
     }
 }

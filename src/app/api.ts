@@ -9,7 +9,7 @@ export class User {
     public username: string;
 }
 
-export class AuthorizationStatus {
+export class RequestStatus {
     successful: boolean;
     description?: string;
 }
