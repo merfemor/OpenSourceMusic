@@ -6,17 +6,21 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/merge';
 import {CookieService} from "ngx-cookie-service";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {Subscription} from "rxjs/Subscription";
+import {AsyncSubject} from "rxjs/AsyncSubject";
 
 @Injectable()
 export class UserService {
-    private userChanges: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+    private userChanges: BehaviorSubject<User> = new BehaviorSubject(null);
+    private sessionLoadStatus: AsyncSubject<boolean> = new AsyncSubject();
 
     constructor(private http: HttpClient, private cookieService: CookieService) {
         this.restoreSessionFromCookies();
-        this.setUser(null);
     }
 
     public getUser(): User {
+        if (!this.userChanges)
+            throw new Error("User change stream has not yet been created");
         return this.userChanges.getValue();
     }
 
@@ -85,7 +89,6 @@ export class UserService {
             headers: new HttpHeaders().set("Content-Type", "application/json")
         }).map(u => {
             if (u) {
-                console.log("set: " + u);
                 this.setUser(u);
                 return {successful: true};
             } else {
@@ -134,12 +137,25 @@ export class UserService {
         return this.getUser() != null;
     }
 
-    public subscribeOnUserChange(onChange: (u: User) => void) {
-        this.userChanges.subscribe(onChange);
+    public subscribeOnUserChange(onChange: (u: User) => void): Subscription {
+        return this.userChanges.subscribe(onChange);
+    }
+
+    public onSessionLoaded(onLoaded: () => void): void {
+        let subscription = this.sessionLoadStatus.subscribe(u => {
+            onLoaded();
+            if (subscription)
+                subscription.unsubscribe();
+        });
+        if (!subscription)
+            onLoaded();
     }
 
     private setUser(u: User) {
-        this.userChanges.next(u);
+        if (!this.userChanges)
+            this.userChanges = new BehaviorSubject(u);
+        else
+            this.userChanges.next(u);
     }
 
     private restoreSessionFromCookies(): User {
@@ -148,20 +164,25 @@ export class UserService {
 
         if (!id || !password) {
             console.log("Failed to restore session from cookies: cookies not set");
+            this.setUser(null);
+            this.sessionLoadStatus.next(true);
+            this.sessionLoadStatus.complete();
             return;
         }
-        this.http.get<User[]>(API_URL_ROOT + "users", {
-            params: new HttpParams()
-                .set("id", id)
-                .set("password", password)
-        }).subscribe(data => {
-            if (data.length != 1) {
-                console.log("Failed to restore session from cookies: bad cookie values");
-                this.clearCookies();
-                return;
-            }
-            this.setUser(data[0]);
-        });
+        this.http.get<User>(API_URL_ROOT + "users/" + id.toString())
+            .subscribe(user => {
+                if (!user || user.password != password) {
+                    console.log("Failed to restore session from cookies: bad cookie values");
+                    this.clearCookies();
+                    this.setUser(null);
+                } else
+                    this.setUser(user);
+            }, e => {
+                this.setUser(null);
+            }, () => {
+                this.sessionLoadStatus.next(true);
+                this.sessionLoadStatus.complete();
+            });
 
     }
 }

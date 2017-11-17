@@ -32,8 +32,6 @@ export class SettingsComponent {
             if (!u)
                 return;
 
-            console.log(u);
-
             this.form = new FormGroup({
                 username: new FormControl(this.user.username,
                     [Validators.required, Validators.pattern(UsernameRegexp)],

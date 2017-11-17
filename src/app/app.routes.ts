@@ -5,6 +5,7 @@ import {SettingsComponent} from "./profile/settings/settings.component";
 import {AuthComponent} from "./profile/auth/auth.component";
 import {SignInComponent} from "./profile/auth/signin/signin.component";
 import {SignUpComponent} from "./profile/auth/signup/signup.component";
+import {NotLoggedInResolver} from "./app.resolvers";
 
 export const routes: Routes = [
     {
@@ -22,7 +23,8 @@ export const routes: Routes = [
     },
     {
         path: "settings",
-        component: SettingsComponent
+        component: SettingsComponent,
+        resolve: [NotLoggedInResolver]
     },
     {
         path: "join",

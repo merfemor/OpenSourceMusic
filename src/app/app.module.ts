@@ -20,6 +20,7 @@ import {DropdownModule} from "ngx-dropdown";
 import {UserService} from "./user.service";
 import {HttpClientModule} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
+import {NotLoggedInResolver} from "./app.resolvers";
 
 
 @NgModule({
@@ -32,7 +33,7 @@ import {CookieService} from "ngx-cookie-service";
         DropdownModule,
         HttpClientModule
     ],
-    providers: [UserService, CookieService],
+    providers: [UserService, CookieService, NotLoggedInResolver],
     bootstrap: [AppComponent]
 })
 export class AppModule {
