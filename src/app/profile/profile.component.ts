@@ -17,7 +17,10 @@ export class ProfileComponent implements OnDestroy {
     constructor(private userService: UserService, private activatedRoute: ActivatedRoute) {
         this.routeSubscription = this.activatedRoute.params.subscribe(params => {
             this.username = params['username'];
-            this.userService.getUserInfo(this.username).subscribe(user => this.user = user);
+            if (!this.username)
+                this.userService.subscribeOnUserChange(u => this.user = u);
+            else
+                this.userService.getUserInfo(this.username).subscribe(user => this.user = user);
         })
     }
 

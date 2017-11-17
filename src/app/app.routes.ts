@@ -9,6 +9,11 @@ import {LoggedInResolver, NotLoggedInResolver} from "./app.resolvers";
 
 export const routes: Routes = [
     {
+        path: "profile",
+        component: ProfileComponent,
+        resolve: [NotLoggedInResolver]
+    },
+    {
         path: "profile/:username",
         component: ProfileComponent
     },
