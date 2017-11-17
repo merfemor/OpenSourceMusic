@@ -19,6 +19,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DropdownModule} from "ngx-dropdown";
 import {UserService} from "./user.service";
 import {HttpClientModule} from "@angular/common/http";
+import {CookieService} from "ngx-cookie-service";
 
 
 @NgModule({
@@ -31,7 +32,7 @@ import {HttpClientModule} from "@angular/common/http";
         DropdownModule,
         HttpClientModule
     ],
-    providers: [UserService],
+    providers: [UserService, CookieService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

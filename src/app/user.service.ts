@@ -3,12 +3,14 @@ import {API_URL_ROOT, AuthorizationStatus, User} from "./api";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map';
+import {CookieService} from "ngx-cookie-service";
 
 @Injectable()
 export class UserService {
     private user: User;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private cookieService: CookieService) {
+        this.restoreSessionFromCookies();
     }
 
     public isLoginExists(login: string): Observable<boolean> {
@@ -32,12 +34,10 @@ export class UserService {
                     callback(unsuccessful);
                     return;
                 }
-                this.user = user;
                 let req = this.http.post<User>(API_URL_ROOT + "users", user, {
                     headers: new HttpHeaders().set("Content-Type", "application/json")
                 });
                 req.subscribe(user => {
-                    this.user = user;
                     callback({
                         successful: true
                     })
@@ -51,17 +51,50 @@ export class UserService {
             params: new HttpParams()
                 .set("password", password)
         }).map(data => {
-            let founded: boolean = false;
-            data.forEach(u => {
-                if (u.username == login || u.email == login) {
-                    founded = true;
-                    this.user = u;
-                }
-            });
-            return founded ?
-                {successful: true} :
-                {successful: false, description: 'Incorrect login or password'}
+            let u: User = data.filter(u => u.username == login || u.email == login).pop();
+
+            console.log(u);
+            if (u) {
+                this.user = u;
+                this.saveSessionInCookies(this.user);
+                return {successful: true};
+            }
+            return {successful: false, description: 'Incorrect login or password'};
         });
+    }
+
+    private clearCookies() {
+        this.cookieService.delete("id");
+        this.cookieService.delete("pass");
+    }
+
+    private restoreSessionFromCookies(): User {
+        let id = this.cookieService.get("id");
+        let password = this.cookieService.get("pass");
+
+        if (!id || !password) {
+            console.log("Failed to restore session from cookie: cookies not set");
+            return;
+        }
+        this.http.get<User[]>(API_URL_ROOT + "users", {
+            params: new HttpParams()
+                .set("id", id)
+                .set("password", password)
+        }).subscribe(data => {
+            if (data.length != 1) {
+                console.log("Failed to restore session from cookie: bad cookie values");
+                this.clearCookies();
+                return;
+            }
+            this.user = data[0];
+            console.log("succ");
+        });
+
+    }
+
+    private saveSessionInCookies(user: User): void {
+        this.cookieService.set("id", user.id.toString());
+        this.cookieService.set("pass", user.password);
     }
 
     public getUser(): User {
