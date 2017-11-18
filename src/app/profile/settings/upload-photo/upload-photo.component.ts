@@ -9,8 +9,7 @@ import {UploadImageService} from "../../../upload-image.service";
     providers: [UploadImageService]
 })
 
-// TODO: prevent multiple dropping
-// TODO: make select item button active
+
 export class UploadPhotoComponent {
     public hasBaseDropZoneOver = false;
     public uploader: FileUploader;
@@ -23,5 +22,9 @@ export class UploadPhotoComponent {
             console.log(response);
             this.isDone = true;
         });
+    }
+
+    public onFileChoose(event) {
+        this.uploadService.addFile(event.srcElement.files[0]);
     }
 }

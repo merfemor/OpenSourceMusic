@@ -8,6 +8,9 @@ export class UploadImageService {
 
     constructor(private cloudinary: Cloudinary) {
         const uploaderOptions: FileUploaderOptions = {
+            allowedMimeType: ['image/png', 'image/gif', 'image/jpeg', 'image/pjpeg', 'image/bmp'],
+            maxFileSize: 5 * 1024 * 1024,
+            queueLimit: 1,
             url: `https://api.cloudinary.com/v1_1/${this.cloudinary.config().cloud_name}/image/upload`,
             autoUpload: false,
             isHTML5: true, // Use xhrTransport in favor of iframeTransport
@@ -55,5 +58,9 @@ export class UploadImageService {
         if (q.length < 1)
             return null;
         return q[0].file.name;
+    }
+
+    public addFile(file: File) {
+        this.uploader.addToQueue([file]);
     }
 }

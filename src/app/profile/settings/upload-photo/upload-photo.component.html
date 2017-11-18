@@ -8,8 +8,9 @@
 
     <div *ngIf="uploadService.isNothingToUpload() && !isDone">
         <label class="choose-file-label" for="choose-file-input">
-            <strong>Choose a file</strong></label> or drag it here.
-        <input id="choose-file-input" type="file" accept="image/*">
+            <strong>Choose a file</strong></label> or drag it here.<br>
+        The size of the picture should not exceed 5Mb.
+        <input id="choose-file-input" type="file" (change)="onFileChoose($event)" accept="image/*">
     </div>
 
     <div class="upload-status" *ngIf="!uploadService.isNothingToUpload() &&
@@ -17,7 +18,7 @@
         {{this.uploadService.getFirstItemName()}}
     </div>
     <div class="upload-status" *ngIf="uploadService.isUploading()">Uploading...</div>
-    <div class="upload-status" *ngIf="isDone">Done!</div>
+    <div class="upload-status" *ngIf="isDone && uploadService.isNothingToUpload()">Done!</div>
     <div class="upload-status" *ngIf="isError">Error!</div>
 </div>
 
