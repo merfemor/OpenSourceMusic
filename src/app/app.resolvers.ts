@@ -22,7 +22,6 @@ export class LoggedInResolver {
 
     resolve(): void {
         this.userService.onSessionLoaded(() => {
-            console.log("in res");
             if (this.userService.isLogged())
                 this.router.navigate(['/']);
         });
