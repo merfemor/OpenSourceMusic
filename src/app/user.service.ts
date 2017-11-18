@@ -122,8 +122,8 @@ export class UserService {
     }
 
     private saveSessionInCookies(): void {
-        this.cookieService.set("id", this.getUser().id.toString(), 30, "/");
-        this.cookieService.set("pass", this.getUser().password);
+        this.cookieService.set("id", this.getUser().id.toString(), 0, "/");
+        this.cookieService.set("pass", this.getUser().password, 0, "/");
     }
 
     private clearCookies() {
