@@ -11,10 +11,10 @@ import {RequestStatus} from "../../../api";
 })
 export class SignInComponent {
     form = new FormGroup({
-        'login': new FormControl(null, [
+        login: new FormControl(null, [
             Validators.required
         ]),
-        'password': new FormControl(null, [
+        password: new FormControl(null, [
             Validators.required
         ])
     });
@@ -24,7 +24,7 @@ export class SignInComponent {
     }
 
     singIn() {
-        let login = this.form.get('username').value;
+        let login = this.form.get('login').value;
         let password = this.form.get('password').value;
         this.userService.signIn(login, password).subscribe(status => {
             if (status.successful)
