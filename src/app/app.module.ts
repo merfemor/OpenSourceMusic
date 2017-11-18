@@ -20,17 +20,23 @@ import {UserService} from "./user.service";
 import {HttpClientModule} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
 import {LoggedInResolver, NotLoggedInResolver} from "./app.resolvers";
-
+import * as Cloudinary from 'cloudinary-core';
+import {CloudinaryModule} from "@cloudinary/angular-4.x";
+import {FileUploadModule} from "ng2-file-upload";
+import {CloudinarySettings} from "./settings";
+import {UploadPhotoComponent} from './profile/settings/upload-photo/upload-photo.component';
 
 @NgModule({
-    declarations: [AppComponent, Parallax, HeaderComponent, FooterComponent, ProjectsComponent, MembersComponent, GroupComponent, ProfileComponent, SettingsComponent, AuthComponent, SignInComponent, SignUpComponent],
+    declarations: [AppComponent, Parallax, HeaderComponent, FooterComponent, ProjectsComponent, MembersComponent, GroupComponent, ProfileComponent, SettingsComponent, AuthComponent, SignInComponent, SignUpComponent, UploadPhotoComponent],
     imports: [
         FormsModule,
         BrowserModule,
         ReactiveFormsModule,
         RouterModule.forRoot(routes),
         DropdownModule,
-        HttpClientModule
+        HttpClientModule,
+        CloudinaryModule.forRoot(Cloudinary, CloudinarySettings),
+        FileUploadModule
     ],
     providers: [UserService, CookieService, NotLoggedInResolver, LoggedInResolver, Title],
     bootstrap: [AppComponent]

@@ -1,0 +1,28 @@
+<div ng2FileDrop
+     [ngClass]='{"file-over": hasBaseDropZoneOver}'
+     (fileOver)="this.hasBaseDropZoneOver = $event"
+     [uploader]="uploader"
+     class="drop-zone">
+
+    <img class="upload-icon" src="/assets/img/upload-icon.svg">
+
+    <div *ngIf="uploadService.isNothingToUpload() && !isDone">
+        <label class="choose-file-label" for="choose-file-input">
+            <strong>Choose a file</strong></label> or drag it here.
+        <input id="choose-file-input" type="file" accept="image/*">
+    </div>
+
+    <div class="upload-status" *ngIf="!uploadService.isNothingToUpload() &&
+                                      !uploadService.isUploading()">
+        {{this.uploadService.getFirstItemName()}}
+    </div>
+    <div class="upload-status" *ngIf="uploadService.isUploading()">Uploading...</div>
+    <div class="upload-status" *ngIf="isDone">Done!</div>
+    <div class="upload-status" *ngIf="isError">Error!</div>
+</div>
+
+<button type="button" class="btn-submit"
+        (click)="uploadService.upload()"
+        [disabled]="uploadService.isNothingToUpload() || uploadService.isUploading()">
+    Change photo
+</button>
