@@ -22,7 +22,10 @@ export class ProfileComponent implements OnDestroy {
             if (!this.username)
                 this.userService.subscribeOnUserChange(user => {
                     this.user = user;
-                    this.title.setTitle(user.username + TITLE_SUFFIX);
+                    if (!user)
+                        this.title.setTitle("User Not Found" + TITLE_SUFFIX);
+                    else
+                        this.title.setTitle(user.username + TITLE_SUFFIX);
                 });
             else
                 this.userService.getUserInfo(this.username)
