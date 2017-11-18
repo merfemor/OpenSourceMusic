@@ -7,3 +7,6 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
 }
+
+export const APP_NAME: string = "OpenSourceMusic";
+export const TITLE_SUFFIX: string = " | " + APP_NAME;
