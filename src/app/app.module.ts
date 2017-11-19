@@ -38,7 +38,13 @@ import {UploadPhotoComponent} from './profile/settings/upload-photo/upload-photo
         CloudinaryModule.forRoot(Cloudinary, CloudinarySettings),
         FileUploadModule
     ],
-    providers: [UserService, CookieService, NotLoggedInResolver, LoggedInResolver, Title],
+    providers: [
+        UserService,
+        CookieService,
+        NotLoggedInResolver,
+        LoggedInResolver,
+        Title
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

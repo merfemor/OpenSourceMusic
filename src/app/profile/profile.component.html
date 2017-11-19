@@ -1,4 +1,5 @@
 <div class="cover-block" *ngIf="user">
+    <div class="avatar" [style.background-image]='getSanitizedUserProfileImageUrl()'></div>
     <div class="user-info">
         <div class="cover-full-name">
             {{user.firstName}} {{user.lastName}}
