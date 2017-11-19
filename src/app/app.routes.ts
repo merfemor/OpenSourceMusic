@@ -13,7 +13,7 @@ export const routes: Routes = [
         path: "profile",
         component: ProfileComponent,
         resolve: [NotLoggedInResolver]
-    },
+    }, // TODO: fix profile/project
     {
         path: "profile/:username",
         component: ProfileComponent,
