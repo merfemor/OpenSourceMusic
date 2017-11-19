@@ -6,6 +6,7 @@ import {AuthComponent} from "./profile/auth/auth.component";
 import {SignInComponent} from "./profile/auth/signin/signin.component";
 import {SignUpComponent} from "./profile/auth/signup/signup.component";
 import {LoggedInResolver, NotLoggedInResolver} from "./app.resolvers";
+import {UserProjectsComponent} from "./profile/user-projects/user-projects.component";
 
 export const routes: Routes = [
     {
@@ -15,7 +16,18 @@ export const routes: Routes = [
     },
     {
         path: "profile/:username",
-        component: ProfileComponent
+        component: ProfileComponent,
+        children: [
+            {
+                path: "projects",
+                component: UserProjectsComponent
+            },
+            {
+                path: "**",
+                redirectTo: "projects",
+                pathMatch: "prefix"
+            }
+        ]
     },
     {
         path: "group",
