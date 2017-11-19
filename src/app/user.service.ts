@@ -121,6 +121,12 @@ export class UserService {
         });
     }
 
+    public changeProfileImage(profileImageUrl: string): Observable<RequestStatus> {
+        let user = this.getUser();
+        user.profileImageUrl = profileImageUrl;
+        return this.updateProfile(user);
+    }
+
     private saveSessionInCookies(): void {
         this.cookieService.set("id", this.getUser().id.toString(), 0, "/");
         this.cookieService.set("pass", this.getUser().password, 0, "/");

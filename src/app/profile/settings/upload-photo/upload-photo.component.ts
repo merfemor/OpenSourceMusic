@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {FileUploader} from "ng2-file-upload";
 import {UploadImageService} from "../../../upload-image.service";
+import {UserService} from "../../../user.service";
 
 @Component({
     selector: 'app-upload-photo',
@@ -14,17 +15,26 @@ export class UploadPhotoComponent {
     public error;
     private isDone: boolean = false;
 
-    constructor(public uploadService: UploadImageService) {
+    constructor(public uploadService: UploadImageService, private userService: UserService) {
         this.uploader = uploadService.getUploader();
         uploadService.subscribe(imageUrl => {
-            this.isDone = true;
+            this.userService.changeProfileImage(imageUrl).subscribe(status => {
+                if (status.successful)
+                    this.isDone = true;
+                else
+                    this.error = {message: status.description};
+            })
         }, error => this.error = error);
-        uploadService.onBuildItemForm(() => this.error = null);
+        uploadService.onBuildItemForm(() => {
+            this.error = null;
+            this.isDone = false;
+        });
     }
 
     public onFileChoose(event) {
         this.uploadService.addFile(event.srcElement.files[0]);
         this.error = null;
+        this.isDone = false;
     }
 
     public status(): string {

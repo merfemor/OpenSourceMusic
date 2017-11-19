@@ -7,6 +7,7 @@ export class User {
     public firstName: string;
     public lastName: string;
     public username: string;
+    public profileImageUrl: string;
 }
 
 export class RequestStatus {
