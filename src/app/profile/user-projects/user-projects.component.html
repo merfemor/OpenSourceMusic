@@ -1,1 +1,16 @@
-Projects Here
+<div *ngIf="projects?.length > 0">
+    <h2>Projects</h2>
+    <table class="projects-table">
+        <tr>
+            <th>Project name</th>
+            <th>Creation Date</th>
+        </tr>
+        <tr *ngFor="let project of projects; let i = index">
+            Project №{{i}}
+        </tr>
+    </table>
+</div>
+
+<div *ngIf="!projects || projects.length == 0">
+    <h2>This user has not yet created any projects.</h2>
+</div>

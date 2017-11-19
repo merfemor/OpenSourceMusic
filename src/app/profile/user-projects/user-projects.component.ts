@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {ProjectService} from "../../project.service";
+import {Project} from "../../api";
 
 @Component({
     selector: 'app-user-projects',
@@ -8,6 +9,8 @@ import {ProjectService} from "../../project.service";
     providers: [ProjectService]
 })
 export class UserProjectsComponent {
+    public projects: Project[] = [];
+
     constructor(private projectService: ProjectService) {
     }
 }
