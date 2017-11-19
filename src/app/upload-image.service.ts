@@ -22,19 +22,29 @@ export class UploadImageService {
         };
 
         this.uploader = new FileUploader(uploaderOptions);
+        this.onBuildItemForm(() => {
+        });
+    }
 
+    public onBuildItemForm(f: () => any) {
         this.uploader.onBuildItemForm = (fileItem: any, form: FormData): any => {
             // Add Cloudinary's unsigned upload preset to the upload form
             form.append('upload_preset', this.cloudinary.config().upload_preset);
             form.append('file', fileItem);
             // Use default "withCredentials" value for CORS requests
             fileItem.withCredentials = false;
+            f();
             return {fileItem, form};
         };
     }
 
-    public setOnCompleteItem(onCompleteItem: (response: string) => void) {
-        this.uploader.onCompleteItem = (item, response: string, status, headers) => onCompleteItem(response)
+    public subscribe(onSuccess: (imageUrl: string) => any, onError?: (error) => any) {
+        this.uploader.onCompleteItem = (item, response: string, status: number, headers) => {
+            if (status !== 200)
+                onError(JSON.parse(response).error);
+            else
+                onSuccess(JSON.parse(response).url);
+        }
     }
 
     public getUploader(): FileUploader {
