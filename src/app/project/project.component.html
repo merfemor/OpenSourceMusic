@@ -3,6 +3,9 @@
     <p>{{project.description}}</p>
 </div>
 
-<div *ngIf="!project">
-    <h1>Failed to get project with such id</h1>
+
+<div *ngIf="!project" class="not-found-cont">
+    <h1 class="not-found-title">Unable to find that project.</h1>
+    <p class="not-found-descr">
+        This project was deleted or you have passed on an incorrect link.</p>
 </div>
