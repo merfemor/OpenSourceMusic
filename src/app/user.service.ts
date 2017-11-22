@@ -128,13 +128,14 @@ export class UserService {
     }
 
     private saveSessionInCookies(): void {
-        this.cookieService.set("id", this.getUser().id.toString(), 0, "/");
-        this.cookieService.set("pass", this.getUser().password, 0, "/");
+        this.cookieService.set("id", this.getUser().id.toString(), 30, "/");
+        this.cookieService.set("pass", this.getUser().password, 30, "/");
     }
 
     private clearCookies() {
-        this.cookieService.delete("id");
-        this.cookieService.delete("pass");
+        this.cookieService.set("id", "", 30, "/");
+        this.cookieService.set("pass", "", 30, "/");
+        console.log("Cookies deleted");
     }
 
     public isLogged(): boolean {
