@@ -37,7 +37,8 @@ export const routes: Routes = [
         children: [
             {
                 path: "new",
-                component: NewProjectComponent
+                component: NewProjectComponent,
+                resolve: [NotLoggedInResolver]
             },
             {
                 path: "**",
