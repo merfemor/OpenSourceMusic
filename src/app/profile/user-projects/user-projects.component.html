@@ -8,7 +8,7 @@
         </tr>
         <tr *ngFor="let project of projects; let i = index" ngClass="{'not-empty': {{project.isEmpty}}">
             <td>{{i + 1}}</td>
-            <td>{{project.title}}</td>
+            <td><a routerLink="/project/{{project.id}}" class="link-btn-dark">{{project.title}}</a></td>
             <td>{{getFormattedDate(project.creationDate)}}</td>
         </tr>
     </table>
