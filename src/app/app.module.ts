@@ -27,9 +27,26 @@ import {CloudinarySettings} from "./settings";
 import {UploadPhotoComponent} from './profile/settings/upload-photo/upload-photo.component';
 import {UserProjectsComponent} from './profile/user-projects/user-projects.component';
 import {ProjectComponent} from './project/project.component';
+import {NewProjectComponent} from "./project/new-project/new-project.component";
 
 @NgModule({
-    declarations: [AppComponent, Parallax, HeaderComponent, FooterComponent, ProjectsComponent, MembersComponent, GroupComponent, ProfileComponent, SettingsComponent, AuthComponent, SignInComponent, SignUpComponent, UploadPhotoComponent, UserProjectsComponent, ProjectComponent],
+    declarations: [
+        AppComponent,
+        Parallax,
+        HeaderComponent,
+        FooterComponent,
+        ProjectsComponent,
+        MembersComponent,
+        GroupComponent,
+        ProfileComponent,
+        SettingsComponent,
+        AuthComponent, SignInComponent,
+        SignUpComponent,
+        UploadPhotoComponent,
+        UserProjectsComponent,
+        ProjectComponent,
+        NewProjectComponent
+    ],
     imports: [
         FormsModule,
         BrowserModule,

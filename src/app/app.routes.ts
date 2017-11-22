@@ -7,6 +7,8 @@ import {SignInComponent} from "./profile/auth/signin/signin.component";
 import {SignUpComponent} from "./profile/auth/signup/signup.component";
 import {LoggedInResolver, LoggedUserProfileResolver, NotLoggedInResolver} from "./app.resolvers";
 import {UserProjectsComponent} from "./profile/user-projects/user-projects.component";
+import {NewProjectComponent} from "./project/new-project/new-project.component";
+import {ProjectComponent} from "./project/project.component";
 
 export const routes: Routes = [
     {
@@ -25,6 +27,21 @@ export const routes: Routes = [
             {
                 path: "**",
                 redirectTo: "projects",
+                pathMatch: "prefix"
+            }
+        ]
+    },
+    {
+        path: "project",
+        component: ProjectComponent,
+        children: [
+            {
+                path: "new",
+                component: NewProjectComponent
+            },
+            {
+                path: "**",
+                redirectTo: "/",
                 pathMatch: "prefix"
             }
         ]
@@ -52,7 +69,7 @@ export const routes: Routes = [
                 component: SignInComponent
             },
             {
-                path: "signup",
+                path: "new-project",
                 component: SignUpComponent
             }
         ],

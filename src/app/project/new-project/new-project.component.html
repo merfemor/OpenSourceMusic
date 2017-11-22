@@ -1,0 +1,22 @@
+<h1>Create new project</h1>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input formControlName="title" class="form-control" id="title" type="text" placeholder="My Awesome Song"
+               autofocus>
+        <div class="form-invalid-text"
+             *ngIf="form.get('title').invalid&&form.get('title').touched">
+            Title is required
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea formControlName="description" class="form-control" id="description"></textarea>
+        <p class="note">Write a brief description of your project here.</p>
+    </div>
+
+    <button [disabled]="form.invalid" type="submit" class="btn-submit" id="signup_button">
+        Create project
+    </button>
+</form>
