@@ -24,3 +24,15 @@ export class RequestStatus {
     successful: boolean;
     description?: string;
 }
+
+
+export class Role {
+    static CREATOR = 0;
+    static MEMBER = 1;
+}
+
+export class ProjectMember {
+    projectId: number;
+    userId: number;
+    role: number; // one of the class Role statics
+}
