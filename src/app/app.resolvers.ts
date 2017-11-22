@@ -8,6 +8,7 @@ export class NotLoggedInResolver {
     }
 
     resolve(): void {
+        console.log("nli")
         this.userService.onSessionLoaded(() => {
             if (!this.userService.isLogged())
                 this.router.navigate(['/join']);
@@ -24,6 +25,19 @@ export class LoggedInResolver {
         this.userService.onSessionLoaded(() => {
             if (this.userService.isLogged())
                 this.router.navigate(['/']);
+        });
+    }
+}
+
+@Injectable()
+export class LoggedUserProfileResolver {
+    constructor(private userService: UserService, private router: Router) {
+    }
+
+    resolve(): void {
+        console.log('lup')
+        this.userService.onSessionLoaded(() => {
+            this.router.navigate(['/profile/' + this.userService.getUser().username]);
         });
     }
 }

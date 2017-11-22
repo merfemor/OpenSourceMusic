@@ -5,15 +5,15 @@ import {SettingsComponent} from "./profile/settings/settings.component";
 import {AuthComponent} from "./profile/auth/auth.component";
 import {SignInComponent} from "./profile/auth/signin/signin.component";
 import {SignUpComponent} from "./profile/auth/signup/signup.component";
-import {LoggedInResolver, NotLoggedInResolver} from "./app.resolvers";
+import {LoggedInResolver, LoggedUserProfileResolver, NotLoggedInResolver} from "./app.resolvers";
 import {UserProjectsComponent} from "./profile/user-projects/user-projects.component";
 
 export const routes: Routes = [
     {
         path: "profile",
         component: ProfileComponent,
-        resolve: [NotLoggedInResolver]
-    }, // TODO: fix profile/project
+        resolve: [NotLoggedInResolver, LoggedUserProfileResolver]
+    },
     {
         path: "profile/:username",
         component: ProfileComponent,
