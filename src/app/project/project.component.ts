@@ -12,12 +12,15 @@ import {Project} from "../api";
 })
 export class ProjectComponent implements OnDestroy {
     private routeSubscription: Subscription;
-    private project: Project;
+    public project: Project;
 
     constructor(private projectService: ProjectService, private activatedRoute: ActivatedRoute) {
         this.routeSubscription = this.activatedRoute.params.subscribe(params => {
             let project_id: number = params['id'];
-            console.log(project_id);
+            this.projectService.getProjectById(project_id).subscribe(p => {
+                this.project = p;
+                console.log(p);
+            });
         })
     }
 

@@ -18,6 +18,12 @@ export class ProjectService {
         });
     }
 
+    public getProjectById(projectId: number): Observable<Project> {
+        return this.http.get<Project[]>(API_URL_ROOT + "projects", {
+            params: new HttpParams().set("id", projectId.toString())
+        }).map(ps => ps[0]);
+    }
+
     public createProject(project: Project): Observable<RequestStatus> {
         if (!this.userService.isLogged())
             return of({successful: false, description: "User not authorized"});

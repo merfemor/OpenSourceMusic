@@ -1,1 +1,8 @@
-<h1>This is project page</h1>
+<div *ngIf="project">
+    <h1>{{project.title}}</h1>
+    <p>{{project.description}}</p>
+</div>
+
+<div *ngIf="!project">
+    <h1>Failed to get project with such id</h1>
+</div>
