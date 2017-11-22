@@ -15,14 +15,20 @@ export class NewProjectComponent {
         title: new FormControl('', Validators.required),
         description: new FormControl()
     });
-    private project: Project;
 
     constructor(private router: Router, private projectService: ProjectService) {
     }
 
     submit() {
-        this.project = new Project();
-        this.project.title = this.form.get('title').value;
-        this.project.description = this.form.get('description').value;
+        let project = new Project();
+        project.title = this.form.get('title').value;
+        project.description = this.form.get('description').value;
+        this.projectService.createProject(project).subscribe(status => {
+            if (status.successful) {
+                this.router.navigateByUrl("/");
+            } else {
+                alert('Failed to create project.\n' + status.description)
+            }
+        });
     }
 }
