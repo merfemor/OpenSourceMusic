@@ -9,14 +9,9 @@
                 <span class="middle-dot-divider"><b>@{{user?.username}}</b></span>
                 <span class="middle-dot-divider">{{user?.email}}</span>
             </div>
-            <div class="scrolling-tabs-container table">
-                <div routerLink="activity">Activity</div>
-                <div routerLink="groups">Groups</div>
-                <div routerLink="/profile/{{user.username}}/projects">Personal projects</div>
-            </div>
         </div>
     </div>
-    <router-outlet></router-outlet>
+    <app-user-projects [user_id]="user.id"></app-user-projects>
 </div>
 
 <div *ngIf="!user" class="user-not-found-cont">

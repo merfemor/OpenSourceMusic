@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ProjectService} from "../../project.service";
 import {Project} from "../../api";
 
@@ -8,9 +8,15 @@ import {Project} from "../../api";
     styleUrls: ['user-projects.component.sass'],
     providers: [ProjectService]
 })
-export class UserProjectsComponent {
+export class UserProjectsComponent implements OnInit {
+    @Input() public user_id: number;
     public projects: Project[] = [];
 
     constructor(private projectService: ProjectService) {
+    }
+
+    ngOnInit() {
+        this.projectService.getProjects(this.user_id)
+            .subscribe(projects => this.projects = projects);
     }
 }
