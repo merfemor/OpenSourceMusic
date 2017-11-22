@@ -16,7 +16,7 @@ export class Project {
     madeById: number;
     title: string;
     description: string;
-    creationDate: Date;
+    creationDate: number;
     isEmpty: boolean;
 }
 
