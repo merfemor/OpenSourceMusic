@@ -2,11 +2,14 @@
     <h2>Projects</h2>
     <table class="projects-table">
         <tr>
-            <th>Project name</th>
+            <th>№</th>
+            <th>Title</th>
             <th>Creation Date</th>
         </tr>
-        <tr *ngFor="let project of projects; let i = index">
-            Project №{{i}}
+        <tr *ngFor="let project of projects; let i = index" ngClass="{'not-empty': {{project.isEmpty}}">
+            <td>{{i + 1}}</td>
+            <td>{{project.title}}</td>
+            <td>{{getFormattedDate(project.creationDate)}}</td>
         </tr>
     </table>
 </div>

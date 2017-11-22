@@ -19,4 +19,8 @@ export class UserProjectsComponent implements OnInit {
         this.projectService.getProjects(this.user_id)
             .subscribe(projects => this.projects = projects);
     }
+
+    public getFormattedDate(sec: number): string {
+        return new Date(sec).toDateString()
+    }
 }
