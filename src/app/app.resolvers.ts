@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {UserService} from "./user.service";
-import {Router} from "@angular/router";
+import {ActivatedRouteSnapshot, Router} from "@angular/router";
+import {isNumeric} from "rxjs/util/isNumeric";
 
 @Injectable()
 export class NotLoggedInResolver {
@@ -37,5 +38,16 @@ export class LoggedUserProfileResolver {
         this.userService.onSessionLoaded(() => {
             this.router.navigate(['/profile/' + this.userService.getUser().username]);
         });
+    }
+}
+
+@Injectable()
+export class IdIsNotNumberResolver {
+    constructor(private router: Router) {
+    }
+
+    resolve(route: ActivatedRouteSnapshot): void {
+        if (!isNumeric(route.params['id']))
+            this.router.navigate(['/'])
     }
 }

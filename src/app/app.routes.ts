@@ -5,7 +5,7 @@ import {SettingsComponent} from "./profile/settings/settings.component";
 import {AuthComponent} from "./profile/auth/auth.component";
 import {SignInComponent} from "./profile/auth/signin/signin.component";
 import {SignUpComponent} from "./profile/auth/signup/signup.component";
-import {LoggedInResolver, LoggedUserProfileResolver, NotLoggedInResolver} from "./app.resolvers";
+import {IdIsNotNumberResolver, LoggedInResolver, LoggedUserProfileResolver, NotLoggedInResolver} from "./app.resolvers";
 import {NewProjectComponent} from "./project/new-project/new-project.component";
 import {ProjectComponent} from "./project/project.component";
 
@@ -20,20 +20,14 @@ export const routes: Routes = [
         component: ProfileComponent
     },
     {
-        path: "project",
+        path: "project/new",
+        component: NewProjectComponent,
+        resolve: [NotLoggedInResolver]
+    },
+    {
+        path: "project/:id",
         component: ProjectComponent,
-        children: [
-            {
-                path: "new",
-                component: NewProjectComponent,
-                resolve: [NotLoggedInResolver]
-            },
-            {
-                path: "**",
-                redirectTo: "/",
-                pathMatch: "prefix"
-            }
-        ]
+        resolve: [IdIsNotNumberResolver]
     },
     {
         path: "group",

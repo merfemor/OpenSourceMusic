@@ -19,7 +19,7 @@ import {DropdownModule} from "ngx-dropdown";
 import {UserService} from "./user.service";
 import {HttpClientModule} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
-import {LoggedInResolver, LoggedUserProfileResolver, NotLoggedInResolver} from "./app.resolvers";
+import {IdIsNotNumberResolver, LoggedInResolver, LoggedUserProfileResolver, NotLoggedInResolver} from "./app.resolvers";
 import * as Cloudinary from 'cloudinary-core';
 import {CloudinaryModule} from "@cloudinary/angular-4.x";
 import {FileUploadModule} from "ng2-file-upload";
@@ -40,7 +40,8 @@ import {NewProjectComponent} from "./project/new-project/new-project.component";
         GroupComponent,
         ProfileComponent,
         SettingsComponent,
-        AuthComponent, SignInComponent,
+        AuthComponent,
+        SignInComponent,
         SignUpComponent,
         UploadPhotoComponent,
         UserProjectsComponent,
@@ -63,6 +64,7 @@ import {NewProjectComponent} from "./project/new-project/new-project.component";
         NotLoggedInResolver,
         LoggedInResolver,
         LoggedUserProfileResolver,
+        IdIsNotNumberResolver,
         Title
     ],
     bootstrap: [AppComponent]
