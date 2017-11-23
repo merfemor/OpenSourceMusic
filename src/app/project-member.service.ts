@@ -10,7 +10,7 @@ export class ProjectMemberService {
 
     public getAllMembersOfProject(projectId: number): Observable<ProjectMember[]> {
         return this.http.get<ProjectMember[]>(API_URL_ROOT + "members", {
-            params: new HttpParams().set("id", projectId.toString())
+            params: new HttpParams().set("projectId", projectId.toString())
         });
     }
 

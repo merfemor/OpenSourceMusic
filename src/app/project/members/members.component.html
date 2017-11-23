@@ -2,13 +2,12 @@
     <h3>Members</h3>
     <ul>
         <li *ngFor="let member of members">
-            <div class="table">
+            <div class="table" [class.creator]='member.role === Role.CREATOR'>
+                <div class="profile-img"
+                     [style.background-image]='getSanitizedUserProfileImageUrl(member.user.profileImageUrl)'></div>
                 <div>
-                    <img class="profile-img" src="/assets/example/img/john.png">
-                </div>
-                <div>
-                    <span><a class="link-btn-dark" href=""><b>@lemon</b></a></span><br>
-                    <span>John Lenon</span>
+                    <span><a class="link-btn-dark" routerLink="/profile/{{member.user.username}}"><b>@{{member.user.username}}</b></a></span><br>
+                    <span>{{member.user.firstName}} {{member.user.lastName}}</span>
                 </div>
             </div>
         </li>
