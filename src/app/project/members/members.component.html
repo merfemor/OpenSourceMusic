@@ -1,15 +1,13 @@
-<div class="members">
-    <h3>Members</h3>
-    <ul>
-        <li *ngFor="let member of members">
-            <div class="table" [class.creator]='member.role === Role.CREATOR'>
-                <div class="profile-img"
-                     [style.background-image]='getSanitizedUserProfileImageUrl(member.user.profileImageUrl)'></div>
-                <div>
-                    <span><a class="link-btn-dark" routerLink="/profile/{{member.user.username}}"><b>@{{member.user.username}}</b></a></span><br>
-                    <span>{{member.user.firstName}} {{member.user.lastName}}</span>
-                </div>
+<div class="head">Members</div>
+<ul>
+    <li *ngFor="let member of members">
+        <div class="table" [class.creator]='member.role === Role.CREATOR'>
+            <div class="profile-img"
+                 [style.background-image]='getSanitizedUserProfileImageUrl(member.user.profileImageUrl)'></div>
+            <div>
+                <span><a class="link-btn-dark" routerLink="/profile/{{member.user.username}}"><b>@{{member.user.username}}</b></a></span><br>
+                <span>{{member.user.firstName}} {{member.user.lastName}}</span>
             </div>
-        </li>
-    </ul>
-</div>
+        </div>
+    </li>
+</ul>
