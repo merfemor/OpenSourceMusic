@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ProjectMember, Role} from "../../api";
 import {ProjectMemberService} from "../../project-member.service";
 import {DomSanitizer} from "@angular/platform-browser";
+import {UserService} from "../../user.service";
 
 @Component({
     selector: 'app-members',
@@ -12,16 +13,31 @@ export class MembersComponent implements OnInit {
     @Input() public projectId: number;
     public members: ProjectMember[] = [];
     public Role = Role;
+    public canManage: boolean = false;
+
+
     public getSanitizedUserProfileImageUrl = (url) =>
-        this.sanitizer.bypassSecurityTrustStyle('url("' + url + '")')
+        this.sanitizer.bypassSecurityTrustStyle('url("' + url + '")');
 
     constructor(private membersService: ProjectMemberService,
-                private sanitizer: DomSanitizer) {
+                private sanitizer: DomSanitizer,
+                private userService: UserService) {
     }
 
     ngOnInit() {
         this.membersService.getAllMembersOfProject(this.projectId)
-            .subscribe(members => this.members = members);
+            .subscribe(members => {
+                this.members = members;
+                this.userService.subscribeOnUserChange(u => {
+                    if (!u || !this.members) {
+                        this.canManage = false;
+                        return;
+                    }
+                    this.canManage = this.members.filter(pm =>
+                        pm.user.id === u.id && pm.role === Role.CREATOR
+                    ).length > 0;
+                });
+            });
     }
 
 }
