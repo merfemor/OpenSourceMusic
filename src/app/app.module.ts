@@ -5,7 +5,7 @@ import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {ProjectsComponent} from './group/projects/projects.component';
-import {MembersComponent} from './group/members/members.component';
+import {MembersComponent} from './project/members/members.component';
 import {GroupComponent} from "./group/group.component";
 import {ProfileComponent} from './profile/profile.component';
 import {RouterModule} from "@angular/router";
@@ -28,6 +28,7 @@ import {UploadPhotoComponent} from './profile/settings/upload-photo/upload-photo
 import {UserProjectsComponent} from './profile/user-projects/user-projects.component';
 import {ProjectComponent} from './project/project.component';
 import {NewProjectComponent} from "./project/new-project/new-project.component";
+import {ProjectMemberService} from "./project-member.service";
 
 @NgModule({
     declarations: [
@@ -65,6 +66,7 @@ import {NewProjectComponent} from "./project/new-project/new-project.component";
         LoggedInResolver,
         LoggedUserProfileResolver,
         IdIsNotNumberResolver,
+        ProjectMemberService,
         Title
     ],
     bootstrap: [AppComponent]

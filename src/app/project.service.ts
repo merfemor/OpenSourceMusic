@@ -1,13 +1,16 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs/Observable";
-import {API_URL_ROOT, Project, RequestStatus} from "./api";
+import {API_URL_ROOT, Project, RequestStatus, Role} from "./api";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {UserService} from "./user.service";
 import {of} from "rxjs/observable/of";
+import {ProjectMemberService} from "./project-member.service";
 
 @Injectable()
 export class ProjectService {
-    constructor(private http: HttpClient, private userService: UserService) {
+    constructor(private http: HttpClient,
+                private userService: UserService,
+                private projectMemberService: ProjectMemberService) {
     }
 
     public getProjects(userId: number, madeByUser = true): Observable<Project[]> {
@@ -31,10 +34,20 @@ export class ProjectService {
         project.madeById = this.userService.getUser().id;
         project.isEmpty = true;
         project.creationDate = Date.now();
+
         return this.http.post<Project>(API_URL_ROOT + "projects", project, {
             headers: new HttpHeaders().set("Content-Type", "application/json")
-        }).map(project => project ?
-            {successful: true} :
-            {successful: false, description: "Unknown error"});
+        }).map(project => {
+            if (!project)
+                return {successful: false, description: "Unknown error"};
+            this.projectMemberService.addMember(
+                project.id,
+                this.userService.getUser(),
+                Role.CREATOR
+            ).subscribe((a) => {
+            });
+
+            return {successful: true};
+        });
     }
 }

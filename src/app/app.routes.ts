@@ -52,7 +52,7 @@ export const routes: Routes = [
                 component: SignInComponent
             },
             {
-                path: "new-project",
+                path: "signup",
                 component: SignUpComponent
             }
         ],

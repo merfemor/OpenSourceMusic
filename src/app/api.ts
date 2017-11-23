@@ -32,7 +32,7 @@ export class Role {
 }
 
 export class ProjectMember {
+    user: User;
     projectId: number;
-    userId: number;
     role: number; // one of the class Role statics
 }
