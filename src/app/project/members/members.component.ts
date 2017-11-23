@@ -46,20 +46,26 @@ export class MembersComponent implements OnInit {
     }
 
     public addMember(user: User) {
-        let pm: ProjectMember = {
-            projectId: this.projectId,
-            user: user,
-            role: Role.MEMBER
-        };
         this.membersService.addMember(
-            pm.projectId,
-            pm.user,
-            pm.role
-        ).subscribe((rs) => {
-            if (rs.successful)
+            this.projectId,
+            user,
+            Role.MEMBER
+        ).subscribe((pm) => {
+            if (pm)
                 this.members.push(pm);
             else
-                console.error("Failed to add member: " + rs.description);
+                console.error("Failed to add member: " + user.username);
         });
+    }
+
+    public deleteMember(member: ProjectMember) {
+        let i = this.members.indexOf(member);
+        if (i < 0) {
+            console.error("Failed to find this member");
+            return;
+        }
+        this.membersService.removeMember(member).subscribe(() => {
+        });
+        this.members.splice(i, 1);
     }
 }

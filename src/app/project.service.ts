@@ -44,7 +44,7 @@ export class ProjectService {
                 project.id,
                 this.userService.getUser(),
                 Role.CREATOR
-            ).subscribe((a) => {
+            ).subscribe(() => {
             });
 
             return {successful: true};

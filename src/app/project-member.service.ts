@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs/Observable";
-import {API_URL_ROOT, ProjectMember, RequestStatus, User} from "./api";
+import {API_URL_ROOT, ProjectMember, User} from "./api";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 
 @Injectable()
@@ -14,7 +14,7 @@ export class ProjectMemberService {
         });
     }
 
-    public addMember(project_id: number, user: User, role: number): Observable<RequestStatus> {
+    public addMember(project_id: number, user: User, role: number): Observable<ProjectMember> {
         let pm: ProjectMember = {
             projectId: project_id,
             user: user,
@@ -22,8 +22,10 @@ export class ProjectMemberService {
         };
         return this.http.post(API_URL_ROOT + "members", pm, {
             headers: new HttpHeaders().set("Content-Type", "application/json")
-        }).map(ans => ans ?
-            {successful: true} :
-            {successful: false, description: "Unknown error"});
+        });
+    }
+
+    public removeMember(member: ProjectMember) {
+        return this.http.delete(API_URL_ROOT + "members/" + member.id);
     }
 }
