@@ -13,3 +13,15 @@ export class UsernameFilter implements PipeTransform {
             it.username.toLowerCase().includes(searchText));
     }
 }
+
+@Pipe({
+    name: 'exceptusers'
+})
+export class ExceptUsersFilter implements PipeTransform {
+    transform(users: User[], ex: User[]): User[] {
+        if (!users) return [];
+        if (!ex) return users;
+        let exids: number[] = ex.map(u => u.id);
+        return users.filter(it => !exids.includes(it.id));
+    }
+}

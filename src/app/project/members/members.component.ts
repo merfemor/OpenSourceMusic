@@ -68,4 +68,8 @@ export class MembersComponent implements OnInit {
         });
         this.members.splice(i, 1);
     }
+
+    public membersAsUsers(): User[] {
+        return this.members.map(m => m.user);
+    }
 }

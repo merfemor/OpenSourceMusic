@@ -30,7 +30,7 @@ import {ProjectMemberService} from "./project-member.service";
 import {Cloudinary} from 'cloudinary-core/cloudinary-core-shrinkwrap';
 import {CloudinaryModule} from '@cloudinary/angular-4.x';
 import {CloudinarySettings} from "./settings";
-import {UsernameFilter} from "./app.filters";
+import {ExceptUsersFilter, UsernameFilter} from "./app.filters";
 
 @NgModule({
     declarations: [
@@ -49,7 +49,8 @@ import {UsernameFilter} from "./app.filters";
         UserProjectsComponent,
         ProjectComponent,
         NewProjectComponent,
-        UsernameFilter
+        UsernameFilter,
+        ExceptUsersFilter
     ],
     imports: [
         FormsModule,

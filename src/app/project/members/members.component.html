@@ -30,7 +30,7 @@
 
     <div class="dropdown-menu-div" [class.hidden]="!sinput.classList.contains('ng-dirty')">
         <ul class="dropdown-menu">
-            <li *ngFor='let user of allUsers | username: searchText'
+            <li *ngFor='let user of allUsers | exceptusers : membersAsUsers() | username: searchText'
                 (click)="addMember(user)">
                 <b>@{{user.username}}</b>
             </li>
