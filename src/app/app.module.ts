@@ -1,6 +1,5 @@
 import {BrowserModule, Title} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {Parallax} from "ngx-parallax";
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
@@ -20,20 +19,21 @@ import {UserService} from "./user.service";
 import {HttpClientModule} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
 import {IdIsNotNumberResolver, LoggedInResolver, LoggedUserProfileResolver, NotLoggedInResolver} from "./app.resolvers";
-import * as Cloudinary from 'cloudinary-core';
-import {CloudinaryModule} from "@cloudinary/angular-4.x";
 import {FileUploadModule} from "ng2-file-upload";
-import {CloudinarySettings} from "./settings";
 import {UploadPhotoComponent} from './profile/settings/upload-photo/upload-photo.component';
 import {UserProjectsComponent} from './profile/user-projects/user-projects.component';
 import {ProjectComponent} from './project/project.component';
 import {NewProjectComponent} from "./project/new-project/new-project.component";
 import {ProjectMemberService} from "./project-member.service";
 
+
+import {Cloudinary} from 'cloudinary-core/cloudinary-core-shrinkwrap';
+import {CloudinaryModule} from '@cloudinary/angular-4.x';
+import {CloudinarySettings} from "./settings";
+
 @NgModule({
     declarations: [
         AppComponent,
-        Parallax,
         HeaderComponent,
         FooterComponent,
         ProjectsComponent,
@@ -56,7 +56,7 @@ import {ProjectMemberService} from "./project-member.service";
         RouterModule.forRoot(routes),
         DropdownModule,
         HttpClientModule,
-        CloudinaryModule.forRoot(Cloudinary, CloudinarySettings),
+        CloudinaryModule.forRoot({Cloudinary: Cloudinary}, CloudinarySettings),
         FileUploadModule
     ],
     providers: [
