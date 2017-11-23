@@ -11,18 +11,10 @@
                     <img src="assets/img/menu-icon.svg">
                 </button>
                 <ul class="dropdown-menu-div dropdown-menu">
+                    <li routerLink="/project/new">New project</li>
                     <li routerLink="/profile">Profile</li>
                     <li routerLink="/settings">Settings</li>
                     <li (click)="userService.logOut()" routerLink="/logout">Log out</li>
-                </ul>
-            </div>
-
-            <div class="dropdown" dropdown>
-                <button class="dropdown-button link-btn-light link-div" dropdown-open>+</button>
-
-                <ul class="dropdown-menu-div dropdown-menu">
-                    <li>New group</li>
-                    <li routerLink="/project/new">New project</li>
                 </ul>
             </div>
         </div>
