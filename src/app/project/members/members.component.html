@@ -13,7 +13,24 @@
 </ul>
 
 <div *ngIf="canManage">
-    <button class="btn-submit">
-        Add member
-    </button>
+    <label for="search-user-text-input">
+        <b>Add members</b>
+    </label>
+    <input [(ngModel)]="searchText"
+           type="search"
+           id="search-user-text-input"
+           class="form-control"
+           placeholder="User nickname"
+           (toggle)="showAdd = true"
+           #sinput
+    >
+
+    <div class="dropdown-menu-div" [class.hidden]="!sinput.classList.contains('ng-dirty')">
+        <ul class="dropdown-menu">
+            <li *ngFor='let user of allUsers | username: searchText'
+                (click)="addMember(user)">
+                <b>@{{user.username}}</b>
+            </li>
+        </ul>
+    </div>
 </div>
