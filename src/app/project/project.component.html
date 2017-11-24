@@ -1,7 +1,11 @@
 <div *ngIf="project">
     <div class="inline-editor-out">
         <h1>
-            <inline-editor type="text" [(ngModel)]="project.title" class="inline-editor"></inline-editor>
+            <inline-editor type="text"
+                           [(ngModel)]="project.title"
+                           (onSave)="onSaveTitle()"
+                           class="inline-editor">
+            </inline-editor>
         </h1>
     </div>
     <div class="column left">
@@ -9,7 +13,11 @@
             <div class="h2">Description:</div>
 
             <i>
-                <inline-editor type="textarea" [(ngModel)]="project.description" class="inline-editor"></inline-editor>
+                <inline-editor type="textarea"
+                               [(ngModel)]="project.description"
+                               (onSave)="onSaveDescription()"
+                               class="inline-editor">
+                </inline-editor>
             </i>
         </div>
 

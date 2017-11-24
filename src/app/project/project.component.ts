@@ -21,6 +21,18 @@ export class ProjectComponent implements OnDestroy {
         })
     }
 
+    onSaveTitle() {
+        this.projectService.changeProjectTitle(this.project.id, this.project.title)
+            .subscribe(() => {
+            });
+    }
+
+    onSaveDescription() {
+        this.projectService.changeProjectDescription(this.project.id, this.project.description)
+            .subscribe(() => {
+            });
+    }
+
     ngOnDestroy(): void {
         this.routeSubscription.unsubscribe();
     }

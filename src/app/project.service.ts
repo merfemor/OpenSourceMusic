@@ -50,4 +50,18 @@ export class ProjectService {
             return {successful: true};
         });
     }
+
+    public changeProjectTitle(projectId: number, newTitle: string): Observable<Project> {
+        return this.http.patch<Project>(API_URL_ROOT + "projects/" + projectId,
+            {title: newTitle}, {
+                headers: new HttpHeaders().set("Content-Type", "application/json")
+            });
+    }
+
+    public changeProjectDescription(projectId: number, newDescription: string): Observable<Project> {
+        return this.http.patch<Project>(API_URL_ROOT + "projects/" + projectId,
+            {description: newDescription}, {
+                headers: new HttpHeaders().set("Content-Type", "application/json")
+            });
+    }
 }
