@@ -1,3 +1,5 @@
+@import "../../forms.sass"
+
 .not-found-cont
   position: relative
   margin-top: 26vh
@@ -21,3 +23,35 @@
 .h2
   font-size: large
   font-weight: bold
+
+::ng-deep .inline-editor-out
+  input
+    @extend .form-control
+  .inline-editor-button-group
+    button
+      @extend .btn-submit
+      height: 30px
+      width: 30px
+      background-image: url('/assets/img/checked-icon.svg')
+      background-size: 70% auto
+      background-repeat: no-repeat
+      background-position: center
+    .btn-danger
+      display: none
+
+.div-margin-after
+  margin-bottom: 10px
+
+.column
+  float: left
+
+.left
+  width: 65%
+
+.right
+  width: 35%
+
+@media (max-width: 600px)
+  .column
+    width: 100%
+

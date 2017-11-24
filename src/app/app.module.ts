@@ -25,7 +25,7 @@ import {UserProjectsComponent} from './profile/user-projects/user-projects.compo
 import {ProjectComponent} from './project/project.component';
 import {NewProjectComponent} from "./project/new-project/new-project.component";
 import {ProjectMemberService} from "./project-member.service";
-
+import {InlineEditorModule} from '@qontu/ngx-inline-editor';
 
 import {Cloudinary} from 'cloudinary-core/cloudinary-core-shrinkwrap';
 import {CloudinaryModule} from '@cloudinary/angular-4.x';
@@ -60,7 +60,8 @@ import {ExceptUsersFilter, UsernameFilter} from "./app.filters";
         DropdownModule,
         HttpClientModule,
         CloudinaryModule.forRoot({Cloudinary: Cloudinary}, CloudinarySettings),
-        FileUploadModule
+        FileUploadModule,
+        InlineEditorModule
     ],
     providers: [
         UserService,
