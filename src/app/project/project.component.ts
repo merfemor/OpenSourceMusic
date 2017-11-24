@@ -1,8 +1,9 @@
-import {Component, OnDestroy} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, ViewChild} from '@angular/core';
 import {ProjectService} from "../project.service";
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
 import {Project} from "../api";
+import {MembersComponent} from "./members/members.component";
 
 @Component({
     selector: 'app-project',
@@ -10,7 +11,8 @@ import {Project} from "../api";
     styleUrls: ['project.component.sass'],
     providers: [ProjectService]
 })
-export class ProjectComponent implements OnDestroy {
+export class ProjectComponent implements OnDestroy, AfterViewInit {
+    @ViewChild(MembersComponent) members: MembersComponent;
     private routeSubscription: Subscription;
     public project: Project;
 
@@ -35,5 +37,9 @@ export class ProjectComponent implements OnDestroy {
 
     ngOnDestroy(): void {
         this.routeSubscription.unsubscribe();
+    }
+
+    ngAfterViewInit(): void {
+        console.log('ololo');
     }
 }

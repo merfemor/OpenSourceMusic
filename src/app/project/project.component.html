@@ -1,10 +1,14 @@
 <div *ngIf="project">
     <div class="inline-editor-out">
         <h1>
-            <inline-editor type="text"
-                           [(ngModel)]="project.title"
-                           (onSave)="onSaveTitle()"
-                           class="inline-editor">
+            <span *ngIf="!members?.canManage">{{project.title}}</span>
+            <!-- TODO: fix ExpressionChangedAfterItHasBeenCheckedError -->
+            <inline-editor
+                    *ngIf="members?.canManage"
+                    type="text"
+                    [(ngModel)]="project.title"
+                    (onSave)="onSaveTitle()"
+                    class="inline-editor">
             </inline-editor>
         </h1>
     </div>
@@ -13,10 +17,13 @@
             <div class="h2">Description:</div>
 
             <i>
-                <inline-editor type="textarea"
-                               [(ngModel)]="project.description"
-                               (onSave)="onSaveDescription()"
-                               class="inline-editor">
+                <span *ngIf="!members?.canManage">{{project.description}}</span>
+                <inline-editor
+                        *ngIf="members?.canManage"
+                        type="textarea"
+                        [(ngModel)]="project.description"
+                        (onSave)="onSaveDescription()"
+                        class="inline-editor">
                 </inline-editor>
             </i>
         </div>
