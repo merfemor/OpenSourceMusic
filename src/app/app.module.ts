@@ -31,6 +31,7 @@ import {Cloudinary} from 'cloudinary-core/cloudinary-core-shrinkwrap';
 import {CloudinaryModule} from '@cloudinary/angular-4.x';
 import {CloudinarySettings} from "./settings";
 import {ExceptUsersFilter, UsernameFilter} from "./app.filters";
+import {FilesListComponent} from './project/files-list/files-list.component';
 
 @NgModule({
     declarations: [
@@ -50,7 +51,8 @@ import {ExceptUsersFilter, UsernameFilter} from "./app.filters";
         ProjectComponent,
         NewProjectComponent,
         UsernameFilter,
-        ExceptUsersFilter
+        ExceptUsersFilter,
+        FilesListComponent
     ],
     imports: [
         FormsModule,

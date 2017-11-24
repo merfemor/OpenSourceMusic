@@ -37,3 +37,9 @@ export class ProjectMember {
     projectId: number;
     role: number; // one of the class Role statics
 }
+
+export class ProjectFile {
+    id?: number;
+    name: string;
+    uploadDate: number;
+}
