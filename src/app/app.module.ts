@@ -32,6 +32,7 @@ import {CloudinaryModule} from '@cloudinary/angular-4.x';
 import {CloudinarySettings} from "./settings";
 import {ExceptUsersFilter, UsernameFilter} from "./app.filters";
 import {FilesListComponent} from './project/files-list/files-list.component';
+import {FileDropModule} from "ngx-file-drop";
 
 @NgModule({
     declarations: [
@@ -63,7 +64,8 @@ import {FilesListComponent} from './project/files-list/files-list.component';
         HttpClientModule,
         CloudinaryModule.forRoot({Cloudinary: Cloudinary}, CloudinarySettings),
         FileUploadModule,
-        InlineEditorModule
+        InlineEditorModule,
+        FileDropModule
     ],
     providers: [
         UserService,

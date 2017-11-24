@@ -29,6 +29,7 @@
     "ng2-file-upload": "^1.2.1",
     "ngx-cookie-service": "^1.0.9",
     "ngx-dropdown": "0.0.22",
+    "ngx-file-drop": "^2.0.1",
     "ngx-parallax": "^2.0.0",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"

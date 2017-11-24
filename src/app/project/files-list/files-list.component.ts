@@ -11,11 +11,20 @@ import {ProjectService} from "../../project.service";
 export class FilesListComponent {
     @Input() public projectId: number;
     public files: ProjectFile[] = [];
+    public hasBaseDropZoneOver: boolean = false;
 
     constructor(private projectService: ProjectService) {
     }
 
     public getFormattedDate(sec: number): string {
         return new Date(sec).toDateString()
+    }
+
+    onFileDrop(event) {
+        console.log(event);
+    }
+
+    status(): string {
+        return 'NOT_SELECTED';
     }
 }

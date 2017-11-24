@@ -1,1 +1,42 @@
 @import "src/projects-table.sass"
+
+::ng-deep #dropZone
+  border: dashed 10px rgba(#388E3C, 0.55)
+  height: 150px
+  text-align: center
+  margin: 18px 0
+  background: rgba(#388E3C, 0.08)
+  border-radius: 0
+  transition: background 100ms linear, border 100ms linear
+
+::ng-deep .over
+  background: rgba(#388E3C, 0.2) !important
+  border: dashed 10px rgba(#388E3C, 0.8) !important
+
+::ng-deep .content
+  display: block !important
+  color: black
+
+.simple-text
+  color: black
+
+#choose-file-input
+  display: none
+
+.upload-icon
+  width: 100%
+  height: 70px
+  display: block
+  margin-bottom: 10px
+  margin-top: 25px
+
+.choose-file-label
+  cursor: pointer
+  color: #2e2e2e
+  & :hover
+    color: black
+    transition: color 100ms linear
+
+.upload-status
+  font-size: large
+  color: black
