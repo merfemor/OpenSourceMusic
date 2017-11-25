@@ -14,7 +14,7 @@
     </div>
 
     <div class="upload-status" *ngIf="status() === 'SELECTED'">
-        {{this.projectFilesService.getFirstItemName()}}
+        {{this.uploadService.getFirstItemName()}}
     </div>
     <div class="upload-status" *ngIf="status() === 'UPLOADING'">Uploading...</div>
     <div class="upload-status" *ngIf="status() === 'UPLOADED_SUCCESS'">Done!</div>
@@ -22,7 +22,7 @@
 </div>
 
 <button type="button" class="btn-submit"
-        (click)="projectFilesService.upload()"
-        [disabled]="projectFilesService.isNothingToUpload() || projectFilesService.isUploading()">
+        (click)="uploadService.upload()"
+        [disabled]="uploadService.isNothingToUpload() || uploadService.isUploading()">
     Change photo
 </button>
