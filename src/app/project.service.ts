@@ -64,4 +64,8 @@ export class ProjectService {
                 headers: new HttpHeaders().set("Content-Type", "application/json")
             });
     }
+
+    public deleteProject(projectId: number) {
+        return this.http.delete(API_URL_ROOT + "projects/" + projectId);
+    }
 }

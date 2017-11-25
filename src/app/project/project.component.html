@@ -33,6 +33,12 @@
                             [isUserManager]="isUserManager">
             </app-files-list>
         </div>
+
+        <button class="delete-project-btn"
+                *ngIf="isUserCreator"
+                (click)="deleteProject()">Delete project
+        </button>
+
     </div>
     <div class="column right">
         <app-members [projectId]="project.id" [isUserCreator]="isUserCreator"></app-members>

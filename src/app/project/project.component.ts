@@ -1,6 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
 import {ProjectService} from "../project.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
 import {Project, Role} from "../api";
 import {ProjectMemberService} from "../project-member.service";
@@ -21,7 +21,8 @@ export class ProjectComponent implements OnDestroy {
     constructor(private projectService: ProjectService,
                 private activatedRoute: ActivatedRoute,
                 private projectMemberService: ProjectMemberService,
-                private userService: UserService) {
+                private userService: UserService,
+                private router: Router) {
         this.routeSubscription = this.activatedRoute.params.subscribe(params => {
             let project_id: number = params['id'];
             this.projectService.getProjectById(project_id).subscribe(p => this.project = p);
@@ -54,5 +55,14 @@ export class ProjectComponent implements OnDestroy {
 
     ngOnDestroy(): void {
         this.routeSubscription.unsubscribe();
+    }
+
+    deleteProject(): void {
+        let doDelete = confirm("Are you sure you want to delete the project?\n" +
+            "This action will irreversibly delete all information about the project.");
+        if (doDelete)
+            this.projectService.deleteProject(this.project.id).subscribe(() => {
+                this.router.navigateByUrl("/profile");
+            });
     }
 }
