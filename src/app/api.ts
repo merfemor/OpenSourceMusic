@@ -40,6 +40,7 @@ export class ProjectMember {
 
 export class ProjectFile {
     id?: number;
+    projectId: number;
     name: string;
     uploadDate: number;
 }

@@ -15,17 +15,14 @@
     There are no files in this project yet.
 </span>
 
-<p *ngIf="true">
-    <b>Upload files:</b>
-    <file-drop (onFileDrop)="onFileDrop($event)">
-        <div>
-            <img class="upload-icon" src="/assets/img/upload-icon.svg">
-            <div *ngIf="status() === 'NOT_SELECTED'">
-                <label class="choose-file-label" for="choose-file-input">
-                    <strong>Choose a file</strong></label><span class="simple-text"> or drag it here.</span>
-                <input id="choose-file-input" type="file" (change)="onFileDrop($event)">
-            </div>
+<file-drop (onFileDrop)="onFileDrop($event)" *ngIf="true">
+    <div>
+        <img class="upload-icon" src="/assets/img/upload-icon.svg">
+        <div *ngIf="!uploadService.isUploading()">
+            <label class="choose-file-label" for="choose-file-input">
+                <strong>Choose a file</strong></label><span class="simple-text"> or drag it here.</span>
+            <input id="choose-file-input" type="file" (change)="onFileSelected($event)">
         </div>
-        <div class="upload-status" *ngIf="status() === 'UPLOADING'">Uploading...</div>
-    </file-drop>
-</p>
+    </div>
+    <div class="upload-status" *ngIf="uploadService.isUploading()">Uploading...</div>
+</file-drop>
