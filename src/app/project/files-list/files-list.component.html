@@ -18,11 +18,11 @@
 <file-drop (onFileDrop)="onFileDrop($event)" *ngIf="true">
     <div>
         <img class="upload-icon" src="/assets/img/upload-icon.svg">
-        <div *ngIf="!uploadService.isUploading()">
+        <div *ngIf="!projectFilesService.isUploading()">
             <label class="choose-file-label" for="choose-file-input">
                 <strong>Choose a file</strong></label><span class="simple-text"> or drag it here.</span>
             <input id="choose-file-input" type="file" (change)="onFileSelected($event)">
         </div>
     </div>
-    <div class="upload-status" *ngIf="uploadService.isUploading()">Uploading...</div>
+    <div class="upload-status" *ngIf="projectFilesService.isUploading()">Uploading...</div>
 </file-drop>

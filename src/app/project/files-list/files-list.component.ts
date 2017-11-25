@@ -1,20 +1,19 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ProjectFile} from "../../api";
-import {ProjectService} from "../../project.service";
 import {UploadEvent, UploadFile} from "ngx-file-drop";
-import {UploadFilesService} from "../../upload-files.service";
+import {ProjectFilesService} from "../../project-files.service";
 
 @Component({
     selector: 'app-files-list',
     templateUrl: 'files-list.component.html',
     styleUrls: ['files-list.component.sass'],
-    providers: [ProjectService, UploadFilesService]
+    providers: [ProjectFilesService]
 })
-export class FilesListComponent {
+export class FilesListComponent implements OnInit {
     @Input() public projectId: number;
     public files: ProjectFile[] = [];
 
-    constructor(public uploadService: UploadFilesService) {
+    constructor(public projectFilesService: ProjectFilesService) {
     }
 
     public getFormattedDate(sec: number): string {
@@ -23,18 +22,20 @@ export class FilesListComponent {
 
     onFileDrop(event: UploadEvent) {
         let files: UploadFile[] = event.files;
-        console.log(files);
         files.forEach(file =>
-            this.uploadService.addFile(file.relativePath, this.projectId));
+            this.projectFilesService.addFile(file.relativePath, this.projectId));
     }
 
     onFileSelected(event) {
         let files: FileList = event.srcElement.files;
         for (let i = 0; i < files.length; i++)
-            this.uploadService.addFile(files.item(i).name, this.projectId);
+            this.projectFilesService.addFile(files.item(i).name, this.projectId);
     }
 
-    status(): string {
-        return 'NOT_SELECTED';
+    ngOnInit() {
+        this.projectFilesService.getAllFiles(this.projectId).subscribe(files => {
+            this.files = files;
+            this.projectFilesService.onFileUploaded(pf => this.files.push(pf));
+        });
     }
 }

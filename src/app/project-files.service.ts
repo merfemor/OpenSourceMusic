@@ -2,10 +2,10 @@ import {Injectable} from '@angular/core';
 import {Subject} from "rxjs/Subject";
 import {Observable} from "rxjs/Observable";
 import {API_URL_ROOT, ProjectFile} from "./api";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 
 @Injectable()
-export class UploadFilesService {
+export class ProjectFilesService {
     private taskQueue: Subject<ProjectFile> = new Subject();
     private resultQueue: Subject<ProjectFile> = new Subject();
     private currentUploads: number = 0;
@@ -40,5 +40,11 @@ export class UploadFilesService {
 
     public isUploading(): boolean {
         return this.currentUploads > 0;
+    }
+
+    public getAllFiles(projectId: number): Observable<ProjectFile[]> {
+        return this.http.get(API_URL_ROOT + "project-files", {
+            params: new HttpParams().set("projectId", projectId.toString())
+        });
     }
 }
