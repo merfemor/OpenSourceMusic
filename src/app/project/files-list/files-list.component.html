@@ -3,7 +3,7 @@
 <table class="projects-table" *ngIf="files?.length > 0">
     <tr>
         <th>Filename</th>
-        <th>Added Date</th>
+        <th class="date-th">Added Date</th>
         <th *ngIf="isUserCreator"></th>
     </tr>
     <tr *ngFor="let file of files">

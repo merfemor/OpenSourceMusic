@@ -1,5 +1,17 @@
 @import "src/projects-table.sass"
 
+table
+  th:first-child
+    width: 70%
+  th:last-child
+    width: 66px
+  th.date-th
+    width: 180px
+  th
+    padding: 8px
+  td
+    padding: 3px
+
 ::ng-deep #dropZone
   border: dashed 10px rgba(#388E3C, 0.55)
   height: 150px
@@ -43,7 +55,7 @@
 
 .delete-file-btn
   padding: 8px
-  width: 100%
+  width: 65px
   border-radius: 4px
   color: white
   transition: background-color 100ms linear
