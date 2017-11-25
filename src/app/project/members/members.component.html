@@ -8,14 +8,14 @@
                 <span><a class="link-btn-dark" routerLink="/profile/{{member.user.username}}"><b>@{{member.user.username}}</b></a></span><br>
                 <span>{{member.user.firstName}} {{member.user.lastName}}</span>
             </div>
-            <div class="delete-member" *ngIf="canManage && member.role != Role.CREATOR">
+            <div class="delete-member" *ngIf="isUserCreator && member.role != Role.CREATOR">
                 <div (click)="deleteMember(member)" style="background-image: url('/assets/img/delete-icon.svg')"></div>
             </div>
         </div>
     </li>
 </ul>
 
-<div *ngIf="canManage">
+<div *ngIf="isUserCreator">
     <label for="search-user-text-input">
         <b>Add members</b>
     </label>
