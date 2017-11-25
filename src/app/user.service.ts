@@ -53,6 +53,8 @@ export class UserService {
             user.firstName = "";
         if (user.lastName == null)
             user.lastName = "";
+        if (user.profileImageUrl == null)
+            user.profileImageUrl = "http://res.cloudinary.com/osm/image/upload/v1511617709/No-Avatar-High-Definition_ulzhtc.jpg";
 
 
         this.isLoginExists(user.email).subscribe(exists => {
