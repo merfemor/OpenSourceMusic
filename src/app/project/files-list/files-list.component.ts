@@ -40,4 +40,11 @@ export class FilesListComponent implements OnInit {
             this.projectFilesService.onFileUploaded(pf => this.files.push(pf));
         });
     }
+
+    deleteFile(file: ProjectFile) {
+        console.log(file);
+        this.projectFilesService.deleteProjectFile(file.id).subscribe(() => {
+        });
+        this.files.splice(this.files.indexOf(file), 1);
+    }
 }

@@ -47,4 +47,8 @@ export class ProjectFilesService {
             params: new HttpParams().set("projectId", projectId.toString())
         });
     }
+
+    public deleteProjectFile(fileId: number) {
+        return this.http.delete(API_URL_ROOT + "project-files/" + fileId);
+    }
 }

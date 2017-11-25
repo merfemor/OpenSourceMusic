@@ -4,10 +4,14 @@
     <tr>
         <th>Filename</th>
         <th>Added Date</th>
+        <th *ngIf="isUserCreator"></th>
     </tr>
     <tr *ngFor="let file of files">
         <td><a class="link-btn-dark">{{file.name}}</a></td>
         <td>{{getFormattedDate(file.uploadDate)}}</td>
+        <td *ngIf="isUserCreator">
+            <button class="delete-file-btn" (click)="deleteFile(file)">Delete</button>
+        </td>
     </tr>
 </table>
 
