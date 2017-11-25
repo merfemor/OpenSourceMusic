@@ -28,4 +28,13 @@ export class ProjectMemberService {
     public removeMember(member: ProjectMember) {
         return this.http.delete(API_URL_ROOT + "members/" + member.id);
     }
+
+    public isUserHasRole(userId: number, projectId: number, role: number): Observable<boolean> {
+        return this.http.get<ProjectMember[]>(API_URL_ROOT + "members", {
+            params: new HttpParams()
+                .set("projectId", projectId.toString())
+                .set("user.id", userId.toString())
+                .set("role", role.toString())
+        }).map(r => r.length > 0);
+    }
 }

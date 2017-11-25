@@ -11,9 +11,9 @@ import {UserService} from "../../user.service";
 })
 export class MembersComponent implements OnInit {
     @Input() public projectId: number;
+    @Input() public isUserCreator: boolean = false;
     public members: ProjectMember[] = [];
     public Role = Role;
-    public canManage: boolean = false;
     public allUsers: User[] = [];
     public searchText: string = "";
     public showAdd: boolean = false;
@@ -30,15 +30,6 @@ export class MembersComponent implements OnInit {
         this.membersService.getAllMembersOfProject(this.projectId)
             .subscribe(members => {
                 this.members = members;
-                this.userService.subscribeOnUserChange(u => {
-                    if (!u || !this.members) {
-                        this.canManage = false;
-                        return;
-                    }
-                    this.canManage = this.members.filter(pm =>
-                        pm.user.id === u.id && pm.role === Role.CREATOR
-                    ).length > 0;
-                });
             });
         this.userService.onSessionLoaded(() => {
             this.userService.getAllUsers().subscribe(users => this.allUsers = users);

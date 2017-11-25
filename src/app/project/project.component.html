@@ -1,10 +1,9 @@
 <div *ngIf="project">
     <div class="inline-editor-out">
         <h1>
-            <span *ngIf="!members?.canManage">{{project.title}}</span>
-            <!-- TODO: fix ExpressionChangedAfterItHasBeenCheckedError -->
+            <span *ngIf="!isUserCreator">{{project.title}}</span>
             <inline-editor
-                    *ngIf="members?.canManage"
+                    *ngIf="isUserCreator"
                     type="text"
                     [(ngModel)]="project.title"
                     (onSave)="onSaveTitle()"
@@ -17,9 +16,9 @@
             <div class="h2">Description:</div>
 
             <i>
-                <span *ngIf="!members?.canManage">{{project.description}}</span>
+                <span *ngIf="!isUserCreator">{{project.description}}</span>
                 <inline-editor
-                        *ngIf="members?.canManage"
+                        *ngIf="isUserCreator"
                         type="textarea"
                         [(ngModel)]="project.description"
                         (onSave)="onSaveDescription()"
@@ -29,11 +28,14 @@
         </div>
 
         <div>
-            <app-files-list [projectId]="project.id"></app-files-list>
+            <app-files-list [projectId]="project.id"
+                            [isUserCreator]="isUserCreator"
+                            [isUserManager]="isUserManager">
+            </app-files-list>
         </div>
     </div>
     <div class="column right">
-        <app-members [projectId]="project.id"></app-members>
+        <app-members [projectId]="project.id" [isUserCreator]="isUserCreator"></app-members>
     </div>
 </div>
 

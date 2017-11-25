@@ -15,7 +15,7 @@
     There are no files in this project yet.
 </span>
 
-<file-drop (onFileDrop)="onFileDrop($event)" *ngIf="true">
+<file-drop (onFileDrop)="onFileDrop($event)" *ngIf="isUserManager || isUserCreator">
     <div>
         <img class="upload-icon" src="/assets/img/upload-icon.svg">
         <div *ngIf="!projectFilesService.isUploading()">

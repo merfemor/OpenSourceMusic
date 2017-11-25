@@ -11,6 +11,8 @@ import {ProjectFilesService} from "../../project-files.service";
 })
 export class FilesListComponent implements OnInit {
     @Input() public projectId: number;
+    @Input() public isUserManager: boolean = false;
+    @Input() public isUserCreator: boolean = false;
     public files: ProjectFile[] = [];
 
     constructor(public projectFilesService: ProjectFilesService) {
