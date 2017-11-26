@@ -5,6 +5,11 @@
 
     <tabs class="tabs">
         <tab tabTitle="People" class="tab">
+            <span class="no-results" *ngIf="(cont.allUsers | fullusr: searchPhrase).length===0">
+                Sorry we didn't find any results for “{{searchPhrase}}”.<br>
+                Check the spelling, or try a different search.
+            </span>
+
             <div class="result-item table"
                  *ngFor="let user of cont.allUsers | fullusr: searchPhrase"
                  routerLink="/profile/{{user.username}}">
@@ -18,6 +23,12 @@
             </div>
         </tab>
         <tab tabTitle="Projects" class="tab">
+
+            <span class="no-results" *ngIf="(cont.allProjects | projectTitle: searchPhrase).length===0">
+                Sorry we didn't find any results for “{{searchPhrase}}”.<br>
+                Check the spelling, or try a different search.
+            </span>
+
             <div class="result-item"
                  *ngFor="let project of cont.allProjects | projectTitle: searchPhrase"
                  routerLink="/project/{{project.id}}"
