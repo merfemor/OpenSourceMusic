@@ -28,7 +28,7 @@ export class SignInComponent {
         let password = this.form.get('password').value;
         this.userService.signIn(login, password).subscribe(status => {
             if (status.successful)
-                this.router.navigateByUrl("/");
+                this.router.navigateByUrl("/profile/" + this.userService.getUser().username);
             else
                 this.authStatus = status;
         });
