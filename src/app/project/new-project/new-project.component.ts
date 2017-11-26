@@ -23,11 +23,11 @@ export class NewProjectComponent {
         let project = new Project();
         project.title = this.form.get('title').value;
         project.description = this.form.get('description').value;
-        this.projectService.createProject(project).subscribe(status => {
-            if (status.successful) {
-                this.router.navigateByUrl("/");
+        this.projectService.createProject(project).subscribe(project => {
+            if (project) {
+                this.router.navigateByUrl("/project/" + project.id);
             } else {
-                alert('Failed to create project.\n' + status.description)
+                alert('Failed to create project.\n');
             }
         });
     }

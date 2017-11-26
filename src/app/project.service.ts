@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs/Observable";
-import {API_URL_ROOT, Project, RequestStatus, Role} from "./api";
+import {API_URL_ROOT, Project, Role} from "./api";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {UserService} from "./user.service";
-import {of} from "rxjs/observable/of";
 import {ProjectMemberService} from "./project-member.service";
 
 @Injectable()
@@ -27,9 +26,9 @@ export class ProjectService {
         }).map(ps => ps[0]);
     }
 
-    public createProject(project: Project): Observable<RequestStatus> {
+    public createProject(project: Project): Observable<Project> {
         if (!this.userService.isLogged())
-            return of({successful: false, description: "User not authorized"});
+            return null;
         project.madeByUser = true;
         project.madeById = this.userService.getUser().id;
         project.isEmpty = true;
@@ -38,16 +37,15 @@ export class ProjectService {
         return this.http.post<Project>(API_URL_ROOT + "projects", project, {
             headers: new HttpHeaders().set("Content-Type", "application/json")
         }).map(project => {
-            if (!project)
-                return {successful: false, description: "Unknown error"};
-            this.projectMemberService.addMember(
-                project.id,
-                this.userService.getUser(),
-                Role.CREATOR
-            ).subscribe(() => {
-            });
-
-            return {successful: true};
+            if (project) {
+                this.projectMemberService.addMember(
+                    project.id,
+                    this.userService.getUser(),
+                    Role.CREATOR
+                ).subscribe(() => {
+                });
+            }
+            return project;
         });
     }
 
