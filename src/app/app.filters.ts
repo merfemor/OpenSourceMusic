@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {User} from "./api";
+import {Project, User} from "./api";
 
 @Pipe({
     name: 'username'
@@ -54,5 +54,18 @@ export class ComplexUserFilter implements PipeTransform {
             return allSuits;
         });
     }
+}
 
+
+@Pipe({
+    name: 'projectTitle'
+})
+export class ProjectTitleFilter implements PipeTransform {
+    transform(projects: Project[], searchText: string): Project[] {
+        if (!projects) return [];
+        if (!searchText) return projects;
+        searchText = searchText.toLowerCase();
+        return projects.filter(p =>
+            p.title.toLowerCase().includes(searchText));
+    }
 }

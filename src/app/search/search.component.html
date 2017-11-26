@@ -18,8 +18,12 @@
             </div>
         </tab>
         <tab tabTitle="Projects" class="tab">
-            <div class="result-item" *ngFor="let project of cont.allProjects">
-                {{project.title}}
+            <div class="result-item"
+                 *ngFor="let project of cont.allProjects | projectTitle: searchPhrase"
+                 routerLink="/project/{{project.id}}"
+            >
+                <b>{{project.title}}</b> <br>
+                {{project.description}}
             </div>
         </tab>
     </tabs>

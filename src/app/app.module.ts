@@ -28,7 +28,7 @@ import {InlineEditorModule} from '@qontu/ngx-inline-editor';
 import {Cloudinary} from 'cloudinary-core/cloudinary-core-shrinkwrap';
 import {CloudinaryModule} from '@cloudinary/angular-4.x';
 import {CloudinarySettings} from "./settings";
-import {ComplexUserFilter, ExceptUsersFilter, UsernameFilter} from "./app.filters";
+import {ComplexUserFilter, ExceptUsersFilter, ProjectTitleFilter, UsernameFilter} from "./app.filters";
 import {FilesListComponent} from './project/files-list/files-list.component';
 import {FileDropModule} from "ngx-file-drop";
 import {ProjectComponent} from "./project/project.component";
@@ -54,6 +54,7 @@ import {TabModule} from "angular-tabs-component";
         UsernameFilter,
         ExceptUsersFilter,
         ComplexUserFilter,
+        ProjectTitleFilter,
         FilesListComponent,
         SearchComponent
     ],
