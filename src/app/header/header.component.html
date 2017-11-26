@@ -6,6 +6,7 @@
         </div>
 
         <div class="right-menu" *ngIf="userService.isLogged()">
+
             <div class="dropdown" dropdown>
                 <button class="dropdown-button link-btn-light link-div" dropdown-open>
                     <img src="assets/img/menu-icon.svg">
@@ -16,6 +17,11 @@
                     <li routerLink="/settings">Settings</li>
                     <li (click)="userService.logOut()" routerLink="/logout">Log out</li>
                 </ul>
+            </div>
+
+            <div class="table">
+                <div class="avatar" [style.background-image]="sanitizeUrl(userService.getUser().profileImageUrl)"></div>
+                <div class="light">@{{userService.getUser().username}}</div>
             </div>
         </div>
         <div class="table">
