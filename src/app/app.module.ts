@@ -3,9 +3,8 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
-import {ProjectsComponent} from './group/projects/projects.component';
 import {MembersComponent} from './project/members/members.component';
-import {GroupComponent} from "./group/group.component";
+import {MainComponent} from "./main/main.component";
 import {ProfileComponent} from './profile/profile.component';
 import {RouterModule} from "@angular/router";
 import {routes} from "./app.routes";
@@ -22,7 +21,6 @@ import {IdIsNotNumberResolver, LoggedInResolver, LoggedUserProfileResolver, NotL
 import {FileUploadModule} from "ng2-file-upload";
 import {UploadPhotoComponent} from './profile/settings/upload-photo/upload-photo.component';
 import {UserProjectsComponent} from './profile/user-projects/user-projects.component';
-import {ProjectComponent} from './project/project.component';
 import {NewProjectComponent} from "./project/new-project/new-project.component";
 import {ProjectMemberService} from "./project-member.service";
 import {InlineEditorModule} from '@qontu/ngx-inline-editor';
@@ -33,15 +31,16 @@ import {CloudinarySettings} from "./settings";
 import {ExceptUsersFilter, UsernameFilter} from "./app.filters";
 import {FilesListComponent} from './project/files-list/files-list.component';
 import {FileDropModule} from "ngx-file-drop";
+import {ProjectComponent} from "./project/project.component";
 
 @NgModule({
     declarations: [
         AppComponent,
         HeaderComponent,
         FooterComponent,
-        ProjectsComponent,
         MembersComponent,
-        GroupComponent,
+        MainComponent,
+        ProjectComponent,
         ProfileComponent,
         SettingsComponent,
         AuthComponent,
@@ -49,7 +48,6 @@ import {FileDropModule} from "ngx-file-drop";
         SignUpComponent,
         UploadPhotoComponent,
         UserProjectsComponent,
-        ProjectComponent,
         NewProjectComponent,
         UsernameFilter,
         ExceptUsersFilter,

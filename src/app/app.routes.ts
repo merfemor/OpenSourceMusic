@@ -1,6 +1,6 @@
 import {Routes} from "@angular/router";
 import {ProfileComponent} from "./profile/profile.component";
-import {GroupComponent} from "./group/group.component";
+import {MainComponent} from "./main/main.component";
 import {SettingsComponent} from "./profile/settings/settings.component";
 import {AuthComponent} from "./profile/auth/auth.component";
 import {SignInComponent} from "./profile/auth/signin/signin.component";
@@ -10,6 +10,10 @@ import {NewProjectComponent} from "./project/new-project/new-project.component";
 import {ProjectComponent} from "./project/project.component";
 
 export const routes: Routes = [
+    {
+        path: "",
+        component: MainComponent
+    },
     {
         path: "profile",
         component: ProfileComponent,
@@ -28,10 +32,6 @@ export const routes: Routes = [
         path: "project/:id",
         component: ProjectComponent,
         resolve: [IdIsNotNumberResolver]
-    },
-    {
-        path: "group",
-        component: GroupComponent
     },
     {
         path: "settings",
@@ -60,7 +60,7 @@ export const routes: Routes = [
     },
     {
         path: "**",
-        redirectTo: "group",
-        pathMatch: "prefix"
+        redirectTo: "/",
+        pathMatch: "full"
     }
 ];
