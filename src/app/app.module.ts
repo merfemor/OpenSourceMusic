@@ -32,6 +32,7 @@ import {ExceptUsersFilter, UsernameFilter} from "./app.filters";
 import {FilesListComponent} from './project/files-list/files-list.component';
 import {FileDropModule} from "ngx-file-drop";
 import {ProjectComponent} from "./project/project.component";
+import {SearchComponent} from './search/search.component';
 
 @NgModule({
     declarations: [
@@ -51,7 +52,8 @@ import {ProjectComponent} from "./project/project.component";
         NewProjectComponent,
         UsernameFilter,
         ExceptUsersFilter,
-        FilesListComponent
+        FilesListComponent,
+        SearchComponent
     ],
     imports: [
         FormsModule,

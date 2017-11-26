@@ -8,11 +8,21 @@ import {SignUpComponent} from "./profile/auth/signup/signup.component";
 import {IdIsNotNumberResolver, LoggedInResolver, LoggedUserProfileResolver, NotLoggedInResolver} from "./app.resolvers";
 import {NewProjectComponent} from "./project/new-project/new-project.component";
 import {ProjectComponent} from "./project/project.component";
+import {SearchComponent} from "./search/search.component";
 
 export const routes: Routes = [
     {
         path: "",
         component: MainComponent
+    },
+    {
+        path: "search",
+        redirectTo: "search/",
+        pathMatch: "full"
+    },
+    {
+        path: "search/:query",
+        component: SearchComponent
     },
     {
         path: "profile",
