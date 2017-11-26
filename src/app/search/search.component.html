@@ -6,7 +6,7 @@
     <tabs class="tabs">
         <tab tabTitle="People" class="tab">
             <div class="result-item table"
-                 *ngFor="let user of cont.allUsers | username: searchPhrase"
+                 *ngFor="let user of cont.allUsers | fullusr: searchPhrase"
                  routerLink="/profile/{{user.username}}">
 
                 <div class="avatar" [style.background-image]="sanitizeUrl(user.profileImageUrl)"></div>

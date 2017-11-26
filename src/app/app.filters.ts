@@ -25,3 +25,34 @@ export class ExceptUsersFilter implements PipeTransform {
         return users.filter(it => !exids.includes(it.id));
     }
 }
+
+
+@Pipe({
+    name: 'fullusr'
+})
+export class ComplexUserFilter implements PipeTransform {
+    transform(users: User[], searchText: string): User[] {
+        if (!users) return [];
+        if (!searchText) return users;
+        let phrases = searchText
+            .split(' ')
+            .map(p => p.toLowerCase().trim())
+            .filter(s => s.length > 0);
+        console.log(phrases);
+        return users.filter(u => {
+            let allSuits = true;
+            phrases.forEach(phrase => {
+                if (!u)
+                    return false;
+                if (!(
+                        (u.firstName && u.firstName.toLowerCase().includes(phrase)) ||
+                        (u.lastName && u.lastName.toLowerCase().includes(phrase)) ||
+                        u.username.toLowerCase().includes(phrase) ||
+                        u.email.toLowerCase().includes(phrase)))
+                    allSuits = false;
+            });
+            return allSuits;
+        });
+    }
+
+}
