@@ -1,12 +1,26 @@
-<div class="search-title">
-    Search results for "{{searchPhrase}}"
-</div>
+<div class="all-content">
+    <div class="search-title">
+        Search results for "{{searchPhrase}}"
+    </div>
 
-<tabs class="tabs">
-    <tab tabTitle="People" class="tab">
-        Here people
-    </tab>
-    <tab tabTitle="Projects" class="tab">
-        Here projects
-    </tab>
-</tabs>
+    <tabs class="tabs">
+        <tab tabTitle="People" class="tab">
+            <div class="result-item table"
+                 *ngFor="let user of cont.allUsers | username: searchPhrase"
+                 routerLink="/profile/{{user.username}}">
+
+                <div class="avatar" [style.background-image]="sanitizeUrl(user.profileImageUrl)"></div>
+                <div class="user-info">
+                    <b>@{{user.username}}</b>
+                    <span *ngIf="user.firstName">: </span>
+                    {{user.firstName}} {{user.lastName}} <br> {{user.email}}
+                </div>
+            </div>
+        </tab>
+        <tab tabTitle="Projects" class="tab">
+            <div class="result-item" *ngFor="let project of cont.allProjects">
+                {{project.title}}
+            </div>
+        </tab>
+    </tabs>
+</div>

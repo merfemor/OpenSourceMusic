@@ -66,4 +66,8 @@ export class ProjectService {
     public deleteProject(projectId: number) {
         return this.http.delete(API_URL_ROOT + "projects/" + projectId);
     }
+
+    public getAllProjects(): Observable<Project[]> {
+        return this.http.get(API_URL_ROOT + "projects");
+    }
 }
