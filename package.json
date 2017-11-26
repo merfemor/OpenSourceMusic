@@ -23,6 +23,7 @@
     "@angular/router": "^4.2.4",
     "@cloudinary/angular-4.x": "^1.0.0",
     "@qontu/ngx-inline-editor": "^0.2.0-alpha.12",
+    "angular-tabs-component": "^1.0.6",
     "cloudinary-core": "^2.3.0",
     "core-js": "^2.4.1",
     "lokijs": "^1.5.1",

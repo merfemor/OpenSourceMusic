@@ -33,6 +33,7 @@ import {FilesListComponent} from './project/files-list/files-list.component';
 import {FileDropModule} from "ngx-file-drop";
 import {ProjectComponent} from "./project/project.component";
 import {SearchComponent} from './search/search.component';
+import {TabModule} from "angular-tabs-component";
 
 @NgModule({
     declarations: [
@@ -65,7 +66,8 @@ import {SearchComponent} from './search/search.component';
         CloudinaryModule.forRoot({Cloudinary: Cloudinary}, CloudinarySettings),
         FileUploadModule,
         InlineEditorModule,
-        FileDropModule
+        FileDropModule,
+        TabModule
     ],
     providers: [
         UserService,

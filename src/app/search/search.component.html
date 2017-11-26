@@ -1,1 +1,12 @@
-<input type="search" [(ngModel)]="searchPhrase" title="search">
+<div class="search-title">
+    Search results for "{{searchPhrase}}"
+</div>
+
+<tabs class="tabs">
+    <tab tabTitle="People" class="tab">
+        Here people
+    </tab>
+    <tab tabTitle="Projects" class="tab">
+        Here projects
+    </tab>
+</tabs>
